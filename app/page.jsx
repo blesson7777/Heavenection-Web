@@ -175,9 +175,12 @@ export default function HomePage() {
       <header className="topbar">
         <a className="brand" href="#home">
           <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
+            <img
+              className="brand-mark-image"
+              src="/brand/heavenection-mark.svg"
+              alt=""
+              aria-hidden="true"
+            />
           </span>
           <span className="brand-copy">
             <strong>Heavenection</strong>
@@ -562,7 +565,11 @@ export default function HomePage() {
 
       <footer className="footer">
         <div>
-          <strong>Heavenection</strong>
+          <img
+            className="footer-logo"
+            src="/brand/heavenection-logo.svg"
+            alt="Heavenection logo"
+          />
           <p>Loan consultancy support for customers who want clear guidance and a professional experience.</p>
         </div>
         <div className="footer-links">

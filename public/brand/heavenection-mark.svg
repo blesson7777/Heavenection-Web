@@ -1,0 +1,28 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heavenection logo mark">
+  <defs>
+    <linearGradient id="bg" x1="32" y1="24" x2="224" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6677B3"/>
+      <stop offset="1" stop-color="#4D5C90"/>
+    </linearGradient>
+    <linearGradient id="whiteFade" x1="78" y1="48" x2="182" y2="204" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDF1FF"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="122" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="120" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2"/>
+
+  <path d="M76 99L126 100L183 56" stroke="#F8FAFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="76" cy="99" r="5.5" fill="#F8FAFF"/>
+  <circle cx="183" cy="56" r="5.5" fill="#F8FAFF"/>
+
+  <path d="M95 197L132 84L154 88L117 201L95 197Z" fill="url(#whiteFade)"/>
+  <path d="M132 84L151 73L151 194L132 201V84Z" fill="#F8FAFF"/>
+  <path d="M104 150L123 120H140L122 178L104 150Z" fill="#4D5C90" opacity="0.9"/>
+  <path d="M120 150C125 145 133 145 138 150L145 156L140 165L135 162L130 168C126 171 120 170 117 166L111 160L120 150Z" fill="#F8FAFF" opacity="0.95"/>
+  <path d="M103 190L118 174" stroke="#F8FAFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M158 89L151 104" stroke="#F8FAFF" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="128" cy="136" r="10" fill="#FFFFFF" fill-opacity="0.18"/>
+  <path d="M121 136C124 132 130 132 133 136" stroke="#F8FAFF" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M124 140C126 142 130 142 132 140" stroke="#F8FAFF" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg width="1600" height="520" viewBox="0 0 1600 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heavenection logo">
+  <defs>
+    <linearGradient id="bg" x1="86" y1="40" x2="304" y2="296" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6677B3"/>
+      <stop offset="1" stop-color="#4D5C90"/>
+    </linearGradient>
+    <linearGradient id="whiteFade" x1="116" y1="76" x2="267" y2="292" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EAF0FF"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(66 68)">
+    <circle cx="188" cy="188" r="164" fill="url(#bg)"/>
+    <circle cx="188" cy="188" r="160" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2"/>
+
+    <path d="M122 156L192 158L256 106" stroke="#F8FAFF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="122" cy="156" r="6.2" fill="#F8FAFF"/>
+    <circle cx="256" cy="106" r="6.2" fill="#F8FAFF"/>
+
+    <path d="M144 272L193 128L220 134L171 278L144 272Z" fill="url(#whiteFade)"/>
+    <path d="M193 128L218 115L218 267L193 278V128Z" fill="#F8FAFF"/>
+    <path d="M155 197L181 160H204L179 226L155 197Z" fill="#4D5C90" opacity="0.92"/>
+    <path d="M174 196C181 190 193 190 200 196L209 205L203 217L196 212L190 220C184 224 175 223 171 217L163 210L174 196Z" fill="#F8FAFF" opacity="0.96"/>
+    <path d="M160 259L178 238" stroke="#F8FAFF" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M227 136L220 153" stroke="#F8FAFF" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="189" cy="176" r="12" fill="#FFFFFF" fill-opacity="0.18"/>
+    <path d="M181 176C184 171 194 171 197 176" stroke="#F8FAFF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M184 181C187 184 192 184 195 181" stroke="#F8FAFF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(430 148)">
+    <text x="0" y="142" fill="#F5F8FF" font-family="Arial Black, Arial, sans-serif" font-size="132" font-weight="900" letter-spacing="5">HEAVENECTION</text>
+    <path d="M4 182H1040" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+    <text x="4" y="238" fill="#D9E1F8" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="11">CONNECTING TO HAPPINESS</text>
+  </g>
+</svg>

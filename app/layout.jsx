@@ -17,6 +17,10 @@ export const metadata = {
   title: "Heavenection | Loan Consultancy",
   description:
     "Heavenection is a loan consultancy company that helps customers explore loan options, understand eligibility, and request guidance through the company website.",
+  icons: {
+    icon: "/brand/heavenection-mark.svg",
+    apple: "/brand/heavenection-mark.svg",
+  },
 };
 
 export const viewport = {
