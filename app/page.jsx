@@ -1,86 +1,101 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "Lead management",
+    title: "Home loan guidance",
     description:
-      "Capture, assign, recover, and organize leads with a clean pipeline that keeps the team moving.",
-    accent: "Pipeline control",
+      "Help families explore home loan options, compare lenders, and prepare the right paperwork with less stress.",
+    accent: "Property support",
   },
   {
-    title: "Follow-up workflow",
+    title: "Personal loan assistance",
     description:
-      "Track callbacks, SLA alerts, overdue items, and customer interest without losing the context.",
-    accent: "Follow-up clarity",
+      "Guide customers toward suitable personal loan options for urgent needs, planned expenses, or debt consolidation.",
+    accent: "Quick borrowing",
   },
   {
-    title: "Staff performance",
+    title: "Business loan support",
     description:
-      "Review calls, work hours, quality trends, and live activity in one simple command center.",
-    accent: "Performance view",
+      "Assist small businesses and entrepreneurs in finding lending options for working capital, growth, or equipment.",
+    accent: "Business growth",
   },
   {
-    title: "Salary control",
+    title: "Eligibility review",
     description:
-      "Handle salary history, advances, bonus earnings, and payout summaries without spreadsheet chaos.",
-    accent: "Payroll ready",
+      "Review customer details, income profile, and requirements to suggest loan paths that better match their situation.",
+    accent: "Smart screening",
   },
   {
-    title: "Mobile staff app",
+    title: "Documentation help",
     description:
-      "Give staff a fast app for leads, calls, notifications, and daily work inside a clean mobile flow.",
-    accent: "Field friendly",
+      "Support customers with the documents and details needed to move from enquiry to application smoothly.",
+    accent: "Paperwork help",
   },
   {
-    title: "Admin operations",
+    title: "Lender matching",
     description:
-      "Use a strong admin layer for alerts, release management, work review, and support monitoring.",
-    accent: "Control room",
+      "Connect customers with loan options that fit their goals instead of sending them through a confusing search.",
+    accent: "Right fit",
   },
 ];
 
 const metrics = [
-  { value: "24/7", label: "visibility for operations" },
-  { value: "1", label: "shared workspace for admin and staff" },
-  { value: "360°", label: "customer journey tracking" },
+  { value: "Loan", label: "consultancy focused on customer needs" },
+  { value: "Fast", label: "response to new enquiries" },
+  { value: "Clear", label: "guidance from enquiry to application" },
 ];
 
 const process = [
   {
     step: "01",
-    title: "Lead arrives",
+    title: "Customer enquiry",
     description:
-      "Every new lead enters the system and is ready for allocation, sorting, and first contact.",
+      "A visitor submits a request from the website and shares what kind of loan support they need.",
   },
   {
     step: "02",
-    title: "Staff calls",
+    title: "Needs review",
     description:
-      "The staff member speaks to the customer, notes the outcome, and updates the lead status.",
+      "The team checks the customer profile, loan purpose, and basic details to understand the best path forward.",
   },
   {
     step: "03",
-    title: "Follow-up moves",
+    title: "Guidance shared",
     description:
-      "Callbacks, warnings, and SLA rules keep interested leads visible until the right outcome.",
+      "Suitable loan options, document steps, and next actions are explained clearly to the customer.",
   },
   {
     step: "04",
-    title: "Office closes",
+    title: "Application support",
     description:
-      "The office team reviews the pipeline, marks success or unsuccessful, and tracks reward impact.",
+      "The consultancy helps the customer move through the application process until the lending journey is complete.",
   },
 ];
 
 const highlights = [
-  "Animated hero and card motion",
-  "Dark premium visual style",
-  "Mobile-first responsive layout",
-  "Clear service storytelling",
-  "Railway-ready Next.js deployment",
+  "Professional loan consultancy profile",
+  "Built to inspire customer trust",
+  "Premium dark theme with smooth motion",
+  "Mobile-first and easy to browse",
+  "Enquiry form routed to the company team",
+];
+
+const trustPoints = [
+  {
+    title: "Customer-first support",
+    text: "We focus on matching people with loan guidance that feels practical, not confusing.",
+  },
+  {
+    title: "Simple communication",
+    text: "Customers can send an enquiry quickly and get a clear next step from the company team.",
+  },
+  {
+    title: "Professional presentation",
+    text: "The site is designed to make the company feel dependable, modern, and easy to contact.",
+  },
 ];
 
 const fadeUp = {
@@ -97,15 +112,15 @@ export default function HomePage() {
     name: "",
     phone: "",
     email: "",
-    service_interest: "Lead management",
+    service_interest: "Home loan guidance",
     message: "",
   });
 
   const navLinks = useMemo(
     () => [
+      { href: "#about", label: "About" },
       { href: "#services", label: "Services" },
-      { href: "#platform", label: "Platform" },
-      { href: "#workflow", label: "Workflow" },
+      { href: "#process", label: "Process" },
       { href: "#contact", label: "Contact" },
     ],
     [],
@@ -137,12 +152,12 @@ export default function HomePage() {
         throw new Error(payload?.error || "Unable to submit your enquiry right now.");
       }
 
-      setEnquiryStatus("Thanks. Your enquiry has been sent to our admin team.");
+      setEnquiryStatus("Thanks. Your enquiry has been sent to Heavenection.");
       setFormData({
         name: "",
         phone: "",
         email: "",
-        service_interest: "Lead management",
+        service_interest: "Home loan guidance",
         message: "",
       });
     } catch (error) {
@@ -166,7 +181,7 @@ export default function HomePage() {
           </span>
           <span className="brand-copy">
             <strong>Heavenection</strong>
-            <small>Operations software</small>
+            <small>Loan consultancy</small>
           </span>
         </a>
 
@@ -184,18 +199,14 @@ export default function HomePage() {
 
         <nav className={`nav-links ${menuOpen ? "is-open" : ""}`}>
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-            >
+            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
               {link.label}
             </a>
           ))}
         </nav>
 
         <a className="topbar-cta" href="#contact">
-          Request a demo
+          Get consultation
         </a>
       </header>
 
@@ -208,24 +219,24 @@ export default function HomePage() {
             variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
           >
             <motion.span className="eyebrow" variants={fadeUp}>
-              Built for modern operations teams
+              Helping people find the right loan guidance
             </motion.span>
             <motion.h1 variants={fadeUp}>
-              A premium company website for lead operations, staff control, and
-              live workflow visibility.
+              A trusted loan consultancy website for customers who need clear
+              borrowing advice.
             </motion.h1>
             <motion.p variants={fadeUp}>
-              Heavenection connects lead management, follow-ups, salary
-              summaries, and staff performance into one polished system that
-              feels fast, clear, and ready for everyday work.
+              Heavenection helps people explore loan options, understand the
+              next steps, and connect with a team that can guide them from
+              enquiry to application with confidence.
             </motion.p>
 
             <motion.div className="hero-actions" variants={fadeUp}>
               <a className="button button-primary" href="#services">
                 Explore services
               </a>
-              <a className="button button-secondary" href="#workflow">
-                See the workflow
+              <a className="button button-secondary" href="#contact">
+                Start enquiry
               </a>
             </motion.div>
 
@@ -265,35 +276,35 @@ export default function HomePage() {
               className="visual-card visual-card-large"
               whileHover={{ y: -8, rotate: -1 }}
             >
-              <span className="card-kicker">Live command center</span>
-              <h3>Every team signal stays visible.</h3>
+              <span className="card-kicker">Consultancy profile</span>
+              <h3>Loan guidance that feels clear and personal.</h3>
               <p>
-                Leads, calls, follow-up pressure, and salary status stay easy to
-                monitor from a single modern view.
+                We help customers understand their options, prepare the right
+                details, and move forward with the loan process calmly.
               </p>
               <div className="dashboard-bars">
-                <span style={{ width: "72%" }} />
+                <span style={{ width: "74%" }} />
                 <span style={{ width: "88%" }} />
-                <span style={{ width: "64%" }} />
+                <span style={{ width: "68%" }} />
               </div>
             </motion.article>
             <motion.article
               className="visual-card visual-card-small"
               whileHover={{ y: -8 }}
             >
-              <span className="card-kicker">Current focus</span>
+              <span className="card-kicker">Customer focus</span>
               <ul>
                 <li>
-                  <span>Lead flow</span>
-                  <strong>Stable</strong>
+                  <span>Clear advice</span>
+                  <strong>Easy to understand</strong>
                 </li>
                 <li>
-                  <span>Follow-up alerts</span>
-                  <strong>Active</strong>
+                  <span>Loan options</span>
+                  <strong>Matched carefully</strong>
                 </li>
                 <li>
-                  <span>Staff status</span>
-                  <strong>Visible</strong>
+                  <span>Support</span>
+                  <strong>Responsive</strong>
                 </li>
               </ul>
             </motion.article>
@@ -301,30 +312,83 @@ export default function HomePage() {
               className="visual-card visual-card-stack"
               whileHover={{ y: -8 }}
             >
-              <span className="card-kicker">Team snapshot</span>
+              <span className="card-kicker">What customers receive</span>
               <div className="stack-row">
                 <div>
-                  <strong>Calls</strong>
-                  <span>Tracked live</span>
+                  <strong>Guidance</strong>
+                  <span>On the right loan path</span>
                 </div>
                 <div>
-                  <strong>Work time</strong>
-                  <span>Measured daily</span>
+                  <strong>Documentation</strong>
+                  <span>Help with paperwork</span>
                 </div>
               </div>
               <div className="stack-row">
                 <div>
-                  <strong>Quality</strong>
-                  <span>Reviewed</span>
+                  <strong>Transparency</strong>
+                  <span>Simple communication</span>
                 </div>
                 <div>
-                  <strong>Salary</strong>
-                  <span>History ready</span>
+                  <strong>Next step</strong>
+                  <span>Clear enquiry follow-up</span>
                 </div>
               </div>
             </motion.article>
           </motion.div>
         </section>
+
+        <motion.section
+          id="about"
+          className="section-split"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.div className="split-copy" variants={fadeUp}>
+            <span className="eyebrow">About Heavenection</span>
+            <h2>Built as a loan consultancy brand, not a software demo.</h2>
+            <p>
+              Heavenection is presented here as a professional company profile
+              for customers who want help understanding loan choices. The goal
+              is to look trustworthy, easy to contact, and focused on real
+              customer guidance.
+            </p>
+
+            <div className="feature-list">
+              {trustPoints.map((feature) => (
+                <article key={feature.title} className="feature-card">
+                  <strong>{feature.title}</strong>
+                  <span>{feature.text}</span>
+                </article>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div className="platform-panel" variants={fadeUp}>
+            <article className="platform-card">
+              <span className="card-kicker">Why customers trust us</span>
+              <h3>Simple, steady, and professional loan support.</h3>
+              <div className="platform-grid">
+                <div>
+                  <strong>Customer care</strong>
+                  <span>Friendly response</span>
+                </div>
+                <div>
+                  <strong>Loan clarity</strong>
+                  <span>Practical guidance</span>
+                </div>
+                <div>
+                  <strong>Fast enquiry</strong>
+                  <span>Easy contact flow</span>
+                </div>
+                <div>
+                  <strong>Professional look</strong>
+                  <span>Strong company image</span>
+                </div>
+              </div>
+            </article>
+          </motion.div>
+        </motion.section>
 
         <motion.section
           id="services"
@@ -336,10 +400,11 @@ export default function HomePage() {
         >
           <motion.div className="section-head" variants={fadeUp}>
             <span className="eyebrow">Services</span>
-            <h2>Services that fit the way Heavenection already works.</h2>
+            <h2>Loan consultancy services designed around real customer needs.</h2>
             <p>
-              The site highlights the actual company strengths with a cleaner
-              narrative, stronger visuals, and a more confident presentation.
+              The website presents the company as a helpful guide for people
+              looking for loan options, document assistance, and a smoother
+              borrowing journey.
             </p>
           </motion.div>
 
@@ -364,72 +429,7 @@ export default function HomePage() {
         </motion.section>
 
         <motion.section
-          id="platform"
-          className="section-split"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <motion.div className="split-copy" variants={fadeUp}>
-            <span className="eyebrow">Platform</span>
-            <h2>Designed to look premium and feel effortless on every screen.</h2>
-            <p>
-              The experience uses layered motion, glass surfaces, and strong
-              typography so the company feels modern, trustworthy, and easy to
-              understand.
-            </p>
-
-            <div className="feature-list">
-              {[
-                {
-                  title: "Responsive layout",
-                  text: "Optimized for phones, tablets, laptops, and large desktop screens.",
-                },
-                {
-                  title: "Motion with purpose",
-                  text: "Smooth entrance animations and hover lift effects keep the page feeling alive.",
-                },
-                {
-                  title: "Clear storytelling",
-                  text: "Services, workflow, and contact actions are easy to find without clutter.",
-                },
-              ].map((feature) => (
-                <article key={feature.title} className="feature-card">
-                  <strong>{feature.title}</strong>
-                  <span>{feature.text}</span>
-                </article>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div className="platform-panel" variants={fadeUp}>
-            <article className="platform-card">
-              <span className="card-kicker">Why it feels premium</span>
-              <h3>Dark, bold, and animated without being noisy.</h3>
-              <div className="platform-grid">
-                <div>
-                  <strong>Glass surfaces</strong>
-                  <span>Layered depth</span>
-                </div>
-                <div>
-                  <strong>Gradient light</strong>
-                  <span>Atmospheric glow</span>
-                </div>
-                <div>
-                  <strong>Soft motion</strong>
-                  <span>Comfortable pacing</span>
-                </div>
-                <div>
-                  <strong>Strong type</strong>
-                  <span>Clear hierarchy</span>
-                </div>
-              </div>
-            </article>
-          </motion.div>
-        </motion.section>
-
-        <motion.section
-          id="workflow"
+          id="process"
           className="section-block"
           initial="hidden"
           whileInView="visible"
@@ -437,8 +437,8 @@ export default function HomePage() {
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
         >
           <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">Workflow</span>
-            <h2>A clean journey from lead to outcome.</h2>
+            <span className="eyebrow">Process</span>
+            <h2>A simple path from enquiry to loan guidance.</h2>
           </motion.div>
 
           <div className="workflow-grid">
@@ -467,20 +467,20 @@ export default function HomePage() {
         >
           <div className="contact-copy">
             <span className="eyebrow">Enquiry</span>
-            <h2>Send a website enquiry and let the admin team review it instantly.</h2>
+            <h2>Request loan guidance from the Heavenection team.</h2>
             <p>
-              This form goes straight into the admin panel so your team can see
-              new enquiries without checking email or WhatsApp first.
+              Share your details and what kind of loan help you need. The team
+              can review the enquiry and follow up with the next steps.
             </p>
 
             <div className="contact-points">
               <div>
-                <strong>Fast review</strong>
-                <span>Every submission is stored in the admin inbox.</span>
+                <strong>Easy enquiry</strong>
+                <span>Send your name, contact number, and loan interest in one place.</span>
               </div>
               <div>
-                <strong>Clear context</strong>
-                <span>We capture service interest, contact details, and the page link.</span>
+                <strong>Human response</strong>
+                <span>The company team can review the request and reach out with guidance.</span>
               </div>
             </div>
           </div>
@@ -494,7 +494,7 @@ export default function HomePage() {
                   name="name"
                   value={formData.name}
                   onChange={handleEnquiryChange}
-                  placeholder="Customer name"
+                  placeholder="Your name"
                   required
                 />
               </label>
@@ -505,7 +505,7 @@ export default function HomePage() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleEnquiryChange}
-                  placeholder="Phone number"
+                  placeholder="Mobile number"
                 />
               </label>
               <label>
@@ -519,8 +519,12 @@ export default function HomePage() {
                 />
               </label>
               <label>
-                <span>Service interest</span>
-                <select name="service_interest" value={formData.service_interest} onChange={handleEnquiryChange}>
+                <span>Loan interest</span>
+                <select
+                  name="service_interest"
+                  value={formData.service_interest}
+                  onChange={handleEnquiryChange}
+                >
                   {services.map((service) => (
                     <option key={service.title} value={service.title}>
                       {service.title}
@@ -534,7 +538,7 @@ export default function HomePage() {
                   name="message"
                   value={formData.message}
                   onChange={handleEnquiryChange}
-                  placeholder="Tell us what the customer needs"
+                  placeholder="Tell us what you need help with"
                   rows={4}
                   required
                 />
@@ -559,7 +563,7 @@ export default function HomePage() {
       <footer className="footer">
         <div>
           <strong>Heavenection</strong>
-          <p>Lead operations, staff visibility, and workflow control in one place.</p>
+          <p>Loan consultancy support for customers who want clear guidance and a professional experience.</p>
         </div>
         <div className="footer-links">
           {navLinks.map((link) => (

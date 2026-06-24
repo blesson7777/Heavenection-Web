@@ -14,9 +14,9 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "Heavenection",
+  title: "Heavenection | Loan Consultancy",
   description:
-    "Heavenection builds responsive business systems for lead management, follow-ups, staff performance, salary control, and mobile operations.",
+    "Heavenection is a loan consultancy company that helps customers explore loan options, understand eligibility, and request guidance through the company website.",
 };
 
 export const viewport = {

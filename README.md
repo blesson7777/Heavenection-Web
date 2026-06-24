@@ -1,14 +1,13 @@
 # Heavenection Web
 
-Next.js company website for Heavenection with a premium dark design and animated storytelling.
+Next.js company website for Heavenection, presented as a professional loan consultancy profile with a premium dark design and animated storytelling.
 
 ## Features
 
 - Animated hero section
-- Services showcase
-- Platform highlights
-- Workflow timeline
-- Website enquiry form that posts into the admin inbox
+- Loan consultancy services showcase
+- Company trust and process sections
+- Website enquiry form that posts into the company inbox
 - Mobile navigation
 - Railway-ready Next.js deployment
 
@@ -30,7 +29,7 @@ npm start
 
 ## Environment
 
-Set `BACKEND_API_URL` to the Railway backend base URL so the enquiry form can proxy submissions into the admin panel.
+Set `BACKEND_API_URL` to the Railway backend base URL so the enquiry form can proxy submissions into the company enquiry inbox.
 
 ## Railway Deploy
 
