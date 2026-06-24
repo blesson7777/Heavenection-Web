@@ -8,6 +8,7 @@ Next.js company website for Heavenection with a premium dark design and animated
 - Services showcase
 - Platform highlights
 - Workflow timeline
+- Website enquiry form that posts into the admin inbox
 - Mobile navigation
 - Railway-ready Next.js deployment
 
@@ -24,3 +25,7 @@ npm run dev
 npm run build
 npm start
 ```
+
+## Environment
+
+Set `BACKEND_API_URL` to the Railway backend base URL so the enquiry form can proxy submissions into the admin panel.

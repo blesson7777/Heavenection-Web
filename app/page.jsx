@@ -90,6 +90,16 @@ const fadeUp = {
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [enquiryStatus, setEnquiryStatus] = useState("");
+  const [enquiryError, setEnquiryError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    service_interest: "Lead management",
+    message: "",
+  });
 
   const navLinks = useMemo(
     () => [
@@ -100,6 +110,47 @@ export default function HomePage() {
     ],
     [],
   );
+
+  const handleEnquiryChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleEnquirySubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setEnquiryStatus("");
+    setEnquiryError("");
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          page_url: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload?.error || "Unable to submit your enquiry right now.");
+      }
+
+      setEnquiryStatus("Thanks. Your enquiry has been sent to our admin team.");
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        service_interest: "Lead management",
+        message: "",
+      });
+    } catch (error) {
+      setEnquiryError(error.message || "Unable to submit your enquiry right now.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="page-shell">
@@ -414,17 +465,94 @@ export default function HomePage() {
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeUp}
         >
-          <div>
-            <span className="eyebrow">Contact</span>
-            <h2>Want a company site with more motion and better presence?</h2>
+          <div className="contact-copy">
+            <span className="eyebrow">Enquiry</span>
+            <h2>Send a website enquiry and let the admin team review it instantly.</h2>
             <p>
-              We can keep extending this into more pages, a contact form, case
-              studies, or a services brochure with stronger conversion focus.
+              This form goes straight into the admin panel so your team can see
+              new enquiries without checking email or WhatsApp first.
             </p>
+
+            <div className="contact-points">
+              <div>
+                <strong>Fast review</strong>
+                <span>Every submission is stored in the admin inbox.</span>
+              </div>
+              <div>
+                <strong>Clear context</strong>
+                <span>We capture service interest, contact details, and the page link.</span>
+              </div>
+            </div>
           </div>
-          <a className="button button-primary" href="mailto:hello@heavenection.com">
-            Email the team
-          </a>
+
+          <form className="contact-form" onSubmit={handleEnquirySubmit}>
+            <div className="contact-grid">
+              <label>
+                <span>Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleEnquiryChange}
+                  placeholder="Customer name"
+                  required
+                />
+              </label>
+              <label>
+                <span>Phone</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleEnquiryChange}
+                  placeholder="Phone number"
+                />
+              </label>
+              <label>
+                <span>Email</span>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleEnquiryChange}
+                  placeholder="Email address"
+                />
+              </label>
+              <label>
+                <span>Service interest</span>
+                <select name="service_interest" value={formData.service_interest} onChange={handleEnquiryChange}>
+                  {services.map((service) => (
+                    <option key={service.title} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="contact-message">
+                <span>Message</span>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleEnquiryChange}
+                  placeholder="Tell us what the customer needs"
+                  rows={4}
+                  required
+                />
+              </label>
+            </div>
+
+            {enquiryStatus ? <p className="contact-success">{enquiryStatus}</p> : null}
+            {enquiryError ? <p className="contact-error">{enquiryError}</p> : null}
+
+            <div className="contact-actions">
+              <button type="submit" className="button button-primary" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Submit enquiry"}
+              </button>
+              <a className="button button-secondary" href="mailto:hello@heavenection.com">
+                Email the team
+              </a>
+            </div>
+          </form>
         </motion.section>
       </main>
 
