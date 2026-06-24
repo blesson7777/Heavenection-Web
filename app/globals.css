@@ -597,7 +597,7 @@ textarea {
   z-index: 3;
   display: grid;
   gap: 10px;
-  width: min(270px, 42%);
+  width: min(240px, 34%);
   min-height: 130px;
   padding: 22px;
   border-radius: 8px;
@@ -624,19 +624,19 @@ textarea {
 
 .need-card {
   left: 0;
-  top: 110px;
+  top: 88px;
 }
 
 .support-card-visual {
   right: 0;
-  bottom: 110px;
+  bottom: 88px;
 }
 
 .connection-line {
   position: absolute;
   z-index: 2;
-  left: 18%;
-  right: 18%;
+  left: 22%;
+  right: 22%;
   top: 50%;
   height: 5px;
   border-radius: 999px;
@@ -652,8 +652,8 @@ textarea {
   top: 50%;
   display: grid;
   place-items: center;
-  width: 142px;
-  height: 142px;
+  width: 120px;
+  height: 120px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   color: var(--ink);
@@ -664,18 +664,18 @@ textarea {
 .connection-center::before {
   content: "";
   position: absolute;
-  width: 46px;
-  height: 24px;
-  border-left: 7px solid var(--green);
-  border-bottom: 7px solid var(--green);
-  transform: translateY(-15px) rotate(-45deg);
+  width: 40px;
+  height: 21px;
+  border-left: 6px solid var(--green);
+  border-bottom: 6px solid var(--green);
+  transform: translateY(-13px) rotate(-45deg);
   border-radius: 3px;
 }
 
 .connection-center span {
   align-self: end;
-  padding-bottom: 26px;
-  font-size: 0.82rem;
+  padding-bottom: 22px;
+  font-size: 0.76rem;
   font-weight: 900;
   color: var(--brand-deep);
 }
@@ -962,9 +962,23 @@ textarea {
   }
 
   .connection-card {
-    width: min(240px, 44%);
+    width: min(220px, 42%);
     min-height: 116px;
     padding: 18px;
+  }
+
+  .connection-line {
+    left: 25%;
+    right: 25%;
+  }
+
+  .connection-center {
+    width: 104px;
+    height: 104px;
+  }
+
+  .connection-center span {
+    font-size: 0.68rem;
   }
 }
 
@@ -1058,12 +1072,12 @@ textarea {
 
   .need-card {
     left: 0;
-    top: 24px;
+    top: 20px;
   }
 
   .support-card-visual {
     right: 0;
-    bottom: 24px;
+    bottom: 20px;
   }
 
   .connection-line {
@@ -1072,8 +1086,8 @@ textarea {
   }
 
   .connection-center {
-    width: 118px;
-    height: 118px;
+    width: 98px;
+    height: 98px;
   }
 
   .connection-center::before {
