@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const backendBase = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL;
-  if (!backendBase) {
-    return NextResponse.json(
-      { error: "Backend API URL is not configured." },
-      { status: 500 },
-    );
-  }
+  const backendBase =
+    process.env.BACKEND_API_URL ||
+    process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+    "https://api.heavenection.com";
 
   let payload = {};
   try {

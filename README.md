@@ -29,7 +29,7 @@ npm start
 
 ## Environment
 
-Set `BACKEND_API_URL` to the Railway backend base URL so the enquiry form can proxy submissions into the company enquiry inbox.
+Set `BACKEND_API_URL` to the Railway backend base URL if your API host is different. The website defaults to `https://api.heavenection.com`, which matches the current backend deployment setup.
 
 ## Railway Deploy
 
