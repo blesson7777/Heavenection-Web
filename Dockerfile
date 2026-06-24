@@ -17,6 +17,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY package.json ./
+COPY server.js ./
 
 EXPOSE 3000
-CMD ["sh", "-c", "npm run start -- --hostname 0.0.0.0 --port ${PORT:-3000}"]
+CMD ["node", "server.js"]
