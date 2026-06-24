@@ -98,9 +98,54 @@ const trustPoints = [
   },
 ];
 
+const promisePoints = [
+  {
+    title: "Trust",
+    text: "A calm first impression that feels professional and welcoming.",
+  },
+  {
+    title: "Support",
+    text: "Clear guidance that moves with the customer, not ahead of them.",
+  },
+  {
+    title: "Connection",
+    text: "Two sides meeting in the middle, like a confident loan partnership.",
+  },
+];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
+};
+
+const handLeftVariants = {
+  hidden: { opacity: 0, x: -140, rotate: -12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: -2,
+    transition: { type: "spring", stiffness: 120, damping: 16, delay: 0.08 },
+  },
+};
+
+const handRightVariants = {
+  hidden: { opacity: 0, x: 140, rotate: 12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotate: 2,
+    transition: { type: "spring", stiffness: 120, damping: 16, delay: 0.08 },
+  },
+};
+
+const handshakePopVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 18 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 180, damping: 18, delay: 0.22 },
+  },
 };
 
 export default function HomePage() {
@@ -119,6 +164,7 @@ export default function HomePage() {
   const navLinks = useMemo(
     () => [
       { href: "#about", label: "About" },
+      { href: "#promise", label: "Promise" },
       { href: "#services", label: "Services" },
       { href: "#process", label: "Process" },
       { href: "#contact", label: "Contact" },
@@ -391,6 +437,85 @@ export default function HomePage() {
               </div>
             </article>
           </motion.div>
+        </motion.section>
+
+        <motion.section
+          id="promise"
+          className="handshake-section"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.28 }}
+          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+        >
+          <motion.div className="section-head" variants={fadeUp}>
+            <span className="eyebrow">Company promise</span>
+            <h2>Two sides moving together into one clear solution.</h2>
+            <p>
+              As you scroll, the hands meet in the center like a confident
+              partnership animation. It gives the site a more playful, modern
+              feeling while still looking professional.
+            </p>
+          </motion.div>
+
+          <div className="handshake-grid">
+            <motion.div className="handshake-copy" variants={fadeUp}>
+              <article className="feature-card">
+                <strong>Animated handshake</strong>
+                <span>
+                  The hands slide toward each other on scroll, then settle into
+                  a joined moment with a soft pulse.
+                </span>
+              </article>
+              {promisePoints.map((point) => (
+                <motion.article
+                  key={point.title}
+                  className="feature-card handshake-point"
+                  variants={handshakePopVariants}
+                >
+                  <strong>{point.title}</strong>
+                  <span>{point.text}</span>
+                </motion.article>
+              ))}
+            </motion.div>
+
+            <motion.div className="handshake-stage" variants={fadeUp}>
+              <div className="handshake-orbit handshake-orbit-one" aria-hidden="true" />
+              <div className="handshake-orbit handshake-orbit-two" aria-hidden="true" />
+              <motion.div className="handshake-badge handshake-badge-left" variants={handshakePopVariants}>
+                Trust
+              </motion.div>
+              <motion.div className="handshake-badge handshake-badge-right" variants={handshakePopVariants}>
+                Support
+              </motion.div>
+              <motion.div className="handshake-badge handshake-badge-bottom" variants={handshakePopVariants}>
+                Partnership
+              </motion.div>
+
+              <motion.div className="handshake-join" variants={handshakePopVariants}>
+                <span className="handshake-join-core" />
+                <span className="handshake-join-ring ring-one" />
+                <span className="handshake-join-ring ring-two" />
+              </motion.div>
+
+              <motion.div className="handshake-hand handshake-hand-left" variants={handLeftVariants}>
+                <span className="handshake-arm" />
+                <span className="handshake-palm" />
+                <span className="handshake-finger finger-one" />
+                <span className="handshake-finger finger-two" />
+                <span className="handshake-finger finger-three" />
+                <span className="handshake-finger finger-four" />
+              </motion.div>
+
+              <motion.div className="handshake-hand handshake-hand-right" variants={handRightVariants}>
+                <span className="handshake-arm" />
+                <span className="handshake-palm" />
+                <span className="handshake-finger finger-one" />
+                <span className="handshake-finger finger-two" />
+                <span className="handshake-finger finger-three" />
+                <span className="handshake-finger finger-four" />
+              </motion.div>
+            </motion.div>
+          </div>
         </motion.section>
 
         <motion.section
