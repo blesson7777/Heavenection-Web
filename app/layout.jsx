@@ -14,9 +14,9 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "Heavenection | Loan Consultancy",
+  title: "Heavenection | Financial Guidance",
   description:
-    "Heavenection is a loan consultancy company that helps customers explore loan options, understand eligibility, and request guidance through the company website.",
+    "Heavenection helps customers explore financial options, understand the next step, and request friendly guidance through the company website.",
   icons: {
     icon: "/brand/heavenection-mark.svg",
     apple: "/brand/heavenection-mark.svg",

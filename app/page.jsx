@@ -1,163 +1,105 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#process", label: "Process" },
+  { href: "#support", label: "Support" },
+  { href: "#journey", label: "How it works" },
   { href: "#promise", label: "Promise" },
   { href: "#contact", label: "Contact" },
 ];
 
-const services = [
+const supportOptions = [
   {
-    title: "Home loan guidance",
-    description:
-      "Help families understand home loan options, compare choices, and prepare for the next step with confidence.",
-    accent: "Property support",
+    title: "Home finance help",
+    text: "Friendly guidance for families planning a new home, construction, or property purchase.",
+    tag: "For families",
   },
   {
-    title: "Personal loan assistance",
-    description:
-      "Guide customers toward suitable personal loan options for urgent needs, planned spending, or balance support.",
-    accent: "Quick support",
+    title: "Personal finance support",
+    text: "Simple help for urgent needs, planned expenses, or a better way to handle monthly commitments.",
+    tag: "For individuals",
   },
   {
-    title: "Business loan support",
-    description:
-      "Assist business owners in finding lending options for working capital, growth, and equipment planning.",
-    accent: "Growth support",
+    title: "Business funding help",
+    text: "Support for shop owners, self-employed customers, and growing businesses that need working capital.",
+    tag: "For business",
   },
   {
-    title: "Eligibility review",
-    description:
-      "Review customer details carefully so the loan guidance matches the real profile and requirement.",
-    accent: "Smart screening",
-  },
-  {
-    title: "Documentation help",
-    description:
-      "Support customers with the documents and details needed to move from enquiry to application smoothly.",
-    accent: "Paperwork help",
-  },
-  {
-    title: "Lender matching",
-    description:
-      "Connect customers with loan options that fit their goals instead of sending them through a confusing search.",
-    accent: "Right fit",
+    title: "Document guidance",
+    text: "A calm check of the details and papers needed before moving ahead with an application.",
+    tag: "For clarity",
   },
 ];
 
-const stats = [
-  { value: "Loan", label: "consultancy focused on customer needs" },
-  { value: "Fast", label: "response to new enquiries" },
-  { value: "Clear", label: "guidance from enquiry to application" },
-];
-
-const highlights = [
-  "Professional company profile",
-  "Mobile-friendly and responsive",
-  "Premium dark theme with smooth motion",
-  "Trust-first customer presentation",
-  "Enquiry form for quick contact",
-];
-
-const trustPoints = [
+const steps = [
   {
-    title: "Customer-first support",
-    text: "We focus on matching people with loan guidance that feels practical, not confusing.",
+    label: "Share your need",
+    text: "Send your name, phone number, and the type of financial help you are looking for.",
   },
   {
-    title: "Simple communication",
-    text: "Customers can send an enquiry quickly and get a clear next step from the company team.",
+    label: "Get a clear call back",
+    text: "The Heavenection team listens, understands the requirement, and explains the next step.",
   },
   {
-    title: "Professional presentation",
-    text: "The site is designed to make the company feel dependable, modern, and easy to contact.",
+    label: "Choose the right path",
+    text: "You receive practical guidance that suits your profile, requirement, and comfort level.",
+  },
+  {
+    label: "Move forward calmly",
+    text: "The team helps you prepare the details and continue the process with confidence.",
   },
 ];
 
-const process = [
-  {
-    step: "01",
-    title: "Customer enquiry",
-    description:
-      "A visitor submits a request from the website and shares what kind of loan support they need.",
-  },
-  {
-    step: "02",
-    title: "Needs review",
-    description:
-      "The team checks the customer profile, loan purpose, and basic details to understand the best path forward.",
-  },
-  {
-    step: "03",
-    title: "Guidance shared",
-    description:
-      "Suitable loan options, document steps, and next actions are explained clearly to the customer.",
-  },
-  {
-    step: "04",
-    title: "Application support",
-    description:
-      "The consultancy helps the customer move through the application process until the lending journey is complete.",
-  },
-];
-
-const promisePoints = [
-  {
-    title: "Trust",
-    text: "A calm first impression that feels professional and welcoming.",
-  },
-  {
-    title: "Support",
-    text: "Clear guidance that moves with the customer, not ahead of them.",
-  },
-  {
-    title: "Connection",
-    text: "Two sides meeting in the middle, like a confident loan partnership.",
-  },
+const promiseItems = [
+  "Clear guidance before decisions",
+  "Friendly support in local language",
+  "Fast response for new requests",
+  "Respectful follow-up without confusion",
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 34 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.62, ease: "easeOut" },
+  },
 };
 
-const slideInLeft = {
-  hidden: { opacity: 0, x: -120 },
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.11 },
+  },
+};
+
+const handLeft = {
+  hidden: { opacity: 0, x: -120, rotate: -7 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { type: "spring", stiffness: 120, damping: 18 },
+    rotate: -2,
+    transition: { type: "spring", stiffness: 115, damping: 18 },
   },
 };
 
-const slideInRight = {
-  hidden: { opacity: 0, x: 120 },
+const handRight = {
+  hidden: { opacity: 0, x: 120, rotate: 7 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { type: "spring", stiffness: 120, damping: 18 },
+    rotate: 2,
+    transition: { type: "spring", stiffness: 115, damping: 18 },
   },
 };
 
-const popIn = {
-  hidden: { opacity: 0, scale: 0.86 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring", stiffness: 180, damping: 16 },
-  },
-};
-
-function LogoImage({ src, alt, className, fallbackLabel }) {
+function LogoImage({ className, fallbackLabel, src, alt = "" }) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
-    return <div className={`logo-fallback ${className || ""}`}>{fallbackLabel}</div>;
+    return <span className={`logo-fallback ${className || ""}`}>{fallbackLabel}</span>;
   }
 
   return (
@@ -181,9 +123,11 @@ export default function HomePage() {
     name: "",
     phone: "",
     email: "",
-    service_interest: "Home loan guidance",
+    service_interest: "Home finance help",
     message: "",
   });
+  const { scrollYProgress } = useScroll();
+  const roadProgress = useTransform(scrollYProgress, [0.08, 0.62], ["0%", "100%"]);
 
   const handleEnquiryChange = (event) => {
     const { name, value } = event.target;
@@ -208,49 +152,42 @@ export default function HomePage() {
 
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(payload?.error || "Unable to submit your enquiry right now.");
+        throw new Error(payload?.error || "We could not send your request right now.");
       }
 
-      setEnquiryStatus("Thanks. Your enquiry has been sent to Heavenection.");
+      setEnquiryStatus("Thank you. The Heavenection team will contact you soon.");
       setFormData({
         name: "",
         phone: "",
         email: "",
-        service_interest: "Home loan guidance",
+        service_interest: "Home finance help",
         message: "",
       });
     } catch (error) {
-      setEnquiryError(error.message || "Unable to submit your enquiry right now.");
+      setEnquiryError(error.message || "We could not send your request right now.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="page-shell">
-      <div className="page-glow page-glow-left" aria-hidden="true" />
-      <div className="page-glow page-glow-right" aria-hidden="true" />
-
+    <div className="site-shell">
       <header className="topbar">
-        <a className="brand" href="#home">
+        <a className="brand" href="#home" aria-label="Heavenection home">
           <span className="brand-mark" aria-hidden="true">
             <LogoImage
               src="/brand/heavenection-mark.svg"
-              alt=""
               className="brand-mark-image"
               fallbackLabel="H"
             />
           </span>
-          <span className="brand-copy">
-            <strong>Heavenection</strong>
-            <small>Loan consultancy</small>
-          </span>
+          <span className="brand-name">Heavenection</span>
         </a>
 
         <button
           type="button"
           className="menu-button"
-          aria-label="Toggle navigation"
+          aria-label="Open menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((value) => !value)}
         >
@@ -267,451 +204,281 @@ export default function HomePage() {
           ))}
         </nav>
 
-        <a className="topbar-cta" href="#contact">
-          Get consultation
+        <a className="topbar-action" href="#contact">
+          Request a call
         </a>
       </header>
 
       <main id="home">
-        <section className="hero-grid">
+        <section className="hero-section">
           <motion.div
-            className="hero-copy"
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+            className="hero-media"
+            initial={{ scale: 1.04, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            aria-hidden="true"
           >
-            <motion.span className="eyebrow" variants={fadeUp}>
-              A professional loan consultancy presence
-            </motion.span>
-            <motion.h1 variants={fadeUp}>
-              A polished company website built to earn trust and welcome new enquiries.
-            </motion.h1>
-            <motion.p variants={fadeUp}>
-              Heavenection helps people explore loan options, understand the next steps,
-              and connect with a team that can guide them from enquiry to application
-              with confidence.
-            </motion.p>
-
-            <motion.div className="hero-actions" variants={fadeUp}>
-              <a className="button button-primary" href="#services">
-                Explore services
-              </a>
-              <a className="button button-secondary" href="#contact">
-                Start enquiry
-              </a>
-            </motion.div>
-
-            <motion.div className="metric-row" variants={fadeUp}>
-              {stats.map((metric) => (
-                <article key={metric.label} className="metric-card">
-                  <strong>{metric.value}</strong>
-                  <span>{metric.label}</span>
-                </article>
-              ))}
-            </motion.div>
-
-            <motion.ul className="hero-points" variants={fadeUp}>
-              {highlights.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </motion.ul>
+            <div className="hero-photo" />
+            <div className="hero-road">
+              <span />
+              <span />
+              <span />
+            </div>
           </motion.div>
 
-          <motion.div
-            className="hero-visual"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.75, ease: "easeOut" }}
-          >
-            <div className="hero-visual-backdrop" aria-hidden="true" />
-            <motion.article className="hero-panel hero-panel-large" variants={popIn} whileHover={{ y: -8 }}>
-              <span className="card-kicker">Company profile</span>
-              <div className="hero-logo-wrap">
-                <LogoImage
-                  src="/brand/heavenection-logo.svg"
-                  alt="Heavenection logo"
-                  className="hero-logo"
-                  fallbackLabel="HEAVENECTION"
-                />
-              </div>
-              <h3>Loan guidance that feels clear, calm, and premium.</h3>
-              <p>
-                We help customers understand their options, prepare the right details,
-                and move forward through the loan process with confidence.
-              </p>
-              <div className="dashboard-bars">
-                <span style={{ width: "74%" }} />
-                <span style={{ width: "88%" }} />
-                <span style={{ width: "68%" }} />
-              </div>
-            </motion.article>
-
-            <motion.article className="hero-panel hero-panel-small" variants={popIn} whileHover={{ y: -8 }}>
-              <span className="card-kicker">What customers see</span>
-              <ul>
-                <li>
-                  <span>Clear advice</span>
-                  <strong>Easy to understand</strong>
-                </li>
-                <li>
-                  <span>Loan options</span>
-                  <strong>Matched carefully</strong>
-                </li>
-                <li>
-                  <span>Support</span>
-                  <strong>Responsive and friendly</strong>
-                </li>
-              </ul>
-            </motion.article>
-
-            <motion.article className="hero-panel hero-panel-stack" variants={popIn} whileHover={{ y: -8 }}>
-              <span className="card-kicker">Fast facts</span>
-              <div className="stack-row">
-                <div>
-                  <strong>Guidance</strong>
-                  <span>Loan path support</span>
-                </div>
-                <div>
-                  <strong>Documentation</strong>
-                  <span>Paperwork help</span>
-                </div>
-              </div>
-              <div className="stack-row">
-                <div>
-                  <strong>Transparency</strong>
-                  <span>Simple communication</span>
-                </div>
-                <div>
-                  <strong>Next step</strong>
-                  <span>Clear follow-up</span>
-                </div>
-              </div>
-            </motion.article>
-
-            <motion.div
-              className="floating-pill floating-pill-one"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Trusted support
+          <motion.div className="hero-content" initial="hidden" animate="visible" variants={stagger}>
+            <motion.div className="hero-logo-panel" variants={fadeUp}>
+              <LogoImage
+                src="/brand/heavenection-logo.svg"
+                alt="Heavenection"
+                className="hero-logo"
+                fallbackLabel="HEAVENECTION"
+              />
             </motion.div>
-            <motion.div
-              className="floating-pill floating-pill-two"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Quick response
+            <motion.h1 variants={fadeUp}>Financial support made easier for real people.</motion.h1>
+            <motion.p variants={fadeUp}>
+              Heavenection helps customers understand their options, prepare with confidence,
+              and move toward the right financial path without pressure or confusion.
+            </motion.p>
+            <motion.div className="hero-actions" variants={fadeUp}>
+              <a className="button button-primary" href="#contact">
+                Talk to us
+              </a>
+              <a className="button button-light" href="tel:9846262047">
+                Call 9846262047
+              </a>
             </motion.div>
           </motion.div>
         </section>
 
         <motion.section
-          id="about"
-          className="section-block section-about"
+          id="support"
+          className="section-band support-band"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.18 }}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+          variants={stagger}
         >
-          <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">About Heavenection</span>
-            <h2>Built as a loan consultancy brand with a clear customer focus.</h2>
-            <p>
-              Heavenection is presented here as a professional company profile for
-              customers who want help understanding loan choices. The goal is to look
-              trustworthy, easy to contact, and focused on real customer guidance.
-            </p>
+          <motion.div className="section-heading" variants={fadeUp}>
+            <span>Support customers can understand</span>
+            <h2>Helpful guidance for different money needs.</h2>
           </motion.div>
 
-          <div className="trust-grid">
-            {trustPoints.map((feature) => (
-              <motion.article key={feature.title} className="trust-card" variants={fadeUp} whileHover={{ y: -8 }}>
-                <strong>{feature.title}</strong>
-                <span>{feature.text}</span>
-              </motion.article>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
-          id="services"
-          className="section-block"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.18 }}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-        >
-          <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">Services</span>
-            <h2>Loan consultancy services designed around real customer needs.</h2>
-            <p>
-              The website presents the company as a helpful guide for people looking
-              for loan options, document assistance, and a smoother borrowing journey.
-            </p>
-          </motion.div>
-
-          <div className="service-grid">
-            {services.map((service, index) => (
-              <motion.article
-                key={service.title}
-                className="service-card"
-                variants={fadeUp}
-                whileHover={{ y: -10, scale: 1.01 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              >
-                <span className="service-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="service-accent">{service.accent}</span>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </motion.article>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
-          id="process"
-          className="section-block"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.18 }}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-        >
-          <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">Process</span>
-            <h2>A simple path from enquiry to loan guidance.</h2>
-          </motion.div>
-
-          <div className="process-grid">
-            {process.map((item) => (
-              <motion.article key={item.step} className="process-card" variants={fadeUp} whileHover={{ y: -6 }}>
-                <span>{item.step}</span>
+          <div className="support-grid">
+            {supportOptions.map((item) => (
+              <motion.article className="support-card" key={item.title} variants={fadeUp}>
+                <span>{item.tag}</span>
                 <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                <p>{item.text}</p>
               </motion.article>
             ))}
           </div>
         </motion.section>
+
+        <section id="journey" className="journey-band">
+          <motion.div
+            className="section-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={fadeUp}
+          >
+            <span>How it works</span>
+            <h2>From first message to a clear next step.</h2>
+          </motion.div>
+
+          <div className="journey-road">
+            <motion.div className="journey-line" style={{ height: roadProgress }} />
+            {steps.map((step, index) => (
+              <motion.article
+                className="journey-step"
+                key={step.label}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.32 }}
+                variants={fadeUp}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{step.label}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
 
         <motion.section
           id="promise"
-          className="section-block promise-section"
+          className="promise-band"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.22 }}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+          viewport={{ once: true, amount: 0.2 }}
+          variants={stagger}
         >
-          <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">Company promise</span>
-            <h2>Two sides moving together into one clear solution.</h2>
+          <motion.div className="promise-copy" variants={fadeUp}>
+            <span>Our promise</span>
+            <h2>Two hands meeting in the middle: your need and our support.</h2>
             <p>
-              As you scroll, the hands meet in the center like a confident partnership
-              animation. It gives the site a modern feeling while still looking
-              professional.
+              The experience is designed to feel personal, respectful, and steady from the
+              first request to the final guidance.
             </p>
+            <ul>
+              {promiseItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </motion.div>
 
-          <div className="promise-grid">
-            <motion.div className="promise-copy" variants={fadeUp}>
-              {promisePoints.map((point) => (
-                <motion.article key={point.title} className="promise-card" variants={popIn} whileHover={{ y: -6 }}>
-                  <strong>{point.title}</strong>
-                  <span>{point.text}</span>
-                </motion.article>
-              ))}
+          <motion.div className="handshake-stage" variants={fadeUp} aria-hidden="true">
+            <motion.div className="hand hand-left" variants={handLeft}>
+              <span className="arm" />
+              <span className="palm" />
+              <span className="finger finger-one" />
+              <span className="finger finger-two" />
+              <span className="finger finger-three" />
+              <span className="finger finger-four" />
             </motion.div>
-
-            <motion.div className="promise-stage" variants={fadeUp}>
-              <div className="promise-orbit promise-orbit-one" aria-hidden="true" />
-              <div className="promise-orbit promise-orbit-two" aria-hidden="true" />
-              <motion.div className="promise-badge promise-badge-left" variants={popIn}>
-                Trust
-              </motion.div>
-              <motion.div className="promise-badge promise-badge-right" variants={popIn}>
-                Support
-              </motion.div>
-              <motion.div className="promise-badge promise-badge-bottom" variants={popIn}>
-                Partnership
-              </motion.div>
-
-              <motion.div className="promise-join" variants={popIn}>
-                <span className="promise-join-core" />
-                <span className="promise-join-ring promise-ring-one" />
-                <span className="promise-join-ring promise-ring-two" />
-              </motion.div>
-
-              <motion.div className="promise-hand promise-hand-left" variants={slideInLeft}>
-                <span className="promise-arm" />
-                <span className="promise-palm" />
-                <span className="promise-finger finger-one" />
-                <span className="promise-finger finger-two" />
-                <span className="promise-finger finger-three" />
-                <span className="promise-finger finger-four" />
-              </motion.div>
-
-              <motion.div className="promise-hand promise-hand-right" variants={slideInRight}>
-                <span className="promise-arm" />
-                <span className="promise-palm" />
-                <span className="promise-finger finger-one" />
-                <span className="promise-finger finger-two" />
-                <span className="promise-finger finger-three" />
-                <span className="promise-finger finger-four" />
-              </motion.div>
+            <motion.div className="hand hand-right" variants={handRight}>
+              <span className="arm" />
+              <span className="palm" />
+              <span className="finger finger-one" />
+              <span className="finger finger-two" />
+              <span className="finger finger-three" />
+              <span className="finger finger-four" />
             </motion.div>
-          </div>
+            <motion.div
+              className="handshake-glow"
+              initial={{ opacity: 0, scale: 0.6 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: 0.28, duration: 0.7, ease: "easeOut" }}
+            />
+          </motion.div>
         </motion.section>
 
         <motion.section
           id="contact"
-          className="contact-card"
+          className="contact-band"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
+          viewport={{ once: true, amount: 0.18 }}
+          variants={stagger}
         >
-          <div className="contact-copy">
-            <span className="eyebrow">Enquiry</span>
-            <h2>Request loan guidance from the Heavenection team.</h2>
+          <motion.div className="contact-copy" variants={fadeUp}>
+            <span>Send a request</span>
+            <h2>Tell us what kind of help you need.</h2>
             <p>
-              Share your details and what kind of loan help you need. The team can
-              review the enquiry and follow up with the next steps.
+              Share your details below. The Heavenection team will review it and get back
+              to you with a clear next step.
             </p>
+          </motion.div>
 
-            <div className="contact-points">
-              <div>
-                <strong>Easy enquiry</strong>
-                <span>Send your name, contact number, and loan interest in one place.</span>
-              </div>
-              <div>
-                <strong>Human response</strong>
-                <span>The company team can review the request and reach out with guidance.</span>
-              </div>
-            </div>
-          </div>
+          <motion.form className="contact-form" onSubmit={handleEnquirySubmit} variants={fadeUp}>
+            <label>
+              <span>Name</span>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleEnquiryChange}
+                placeholder="Your name"
+                required
+              />
+            </label>
+            <label>
+              <span>Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleEnquiryChange}
+                placeholder="Mobile number"
+                required
+              />
+            </label>
+            <label>
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleEnquiryChange}
+                placeholder="Email address"
+              />
+            </label>
+            <label>
+              <span>Need</span>
+              <select
+                name="service_interest"
+                value={formData.service_interest}
+                onChange={handleEnquiryChange}
+              >
+                {supportOptions.map((option) => (
+                  <option key={option.title} value={option.title}>
+                    {option.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="message-field">
+              <span>Message</span>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleEnquiryChange}
+                placeholder="Tell us a little about your requirement"
+                rows={5}
+                required
+              />
+            </label>
 
-          <form className="contact-form" onSubmit={handleEnquirySubmit}>
-            <div className="contact-grid">
-              <label>
-                <span>Name</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleEnquiryChange}
-                  placeholder="Your name"
-                  required
-                />
-              </label>
-              <label>
-                <span>Phone</span>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleEnquiryChange}
-                  placeholder="Mobile number"
-                />
-              </label>
-              <label>
-                <span>Email</span>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleEnquiryChange}
-                  placeholder="Email address"
-                />
-              </label>
-              <label>
-                <span>Loan interest</span>
-                <select
-                  name="service_interest"
-                  value={formData.service_interest}
-                  onChange={handleEnquiryChange}
-                >
-                  {services.map((service) => (
-                    <option key={service.title} value={service.title}>
-                      {service.title}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="contact-message">
-                <span>Message</span>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleEnquiryChange}
-                  placeholder="Tell us what you need help with"
-                  rows={4}
-                  required
-                />
-              </label>
-            </div>
+            {enquiryStatus ? <p className="form-success">{enquiryStatus}</p> : null}
+            {enquiryError ? <p className="form-error">{enquiryError}</p> : null}
 
-            {enquiryStatus ? <p className="contact-success">{enquiryStatus}</p> : null}
-            {enquiryError ? <p className="contact-error">{enquiryError}</p> : null}
-
-            <div className="contact-actions">
-              <button type="submit" className="button button-primary" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Submit enquiry"}
-              </button>
-              <a className="button button-secondary" href="mailto:heavenection@gmail.com">
-                Email the team
-              </a>
-            </div>
-          </form>
+            <button type="submit" className="button button-primary" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send request"}
+            </button>
+          </motion.form>
         </motion.section>
       </main>
 
       <footer className="footer">
-        <div className="footer-brand">
-          <div className="footer-brand-row">
-            <span className="footer-mark">
+        <div className="footer-main">
+          <div className="footer-brand">
+            <span className="footer-mark" aria-hidden="true">
               <LogoImage
                 src="/brand/heavenection-mark.svg"
-                alt=""
                 className="footer-mark-image"
                 fallbackLabel="H"
               />
             </span>
             <div>
               <strong>Heavenection</strong>
-              <span>Loan consultancy</span>
+              <p>Connecting to happiness through clear financial guidance.</p>
             </div>
           </div>
-          <p>
-            Professional loan consultancy support for customers who want clear
-            guidance and a dependable first impression.
-          </p>
-        </div>
 
-        <div className="footer-columns">
-          <div className="footer-column">
-            <span>Address</span>
-            <p>16/2561, Opposite CSI Church</p>
-            <p>Kattappana, Idukki, Kerala - 685508</p>
-          </div>
-          <div className="footer-column">
-            <span>Contact</span>
-            <a href="tel:9846262047">9846262047</a>
-            <a href="mailto:heavenection@gmail.com">heavenection@gmail.com</a>
-          </div>
-          <div className="footer-column">
-            <span>Company</span>
-            <p>Heavenection</p>
-            <p>Powered by INZSOFT TECHNOLOGIES</p>
+          <div className="footer-contact">
+            <div>
+              <span>Address</span>
+              <p>16/2561, Opposite CSI Church</p>
+              <p>Kattappana, Idukki, Kerala - 685508</p>
+            </div>
+            <div>
+              <span>Phone</span>
+              <a href="tel:9846262047">9846262047</a>
+            </div>
+            <div>
+              <span>Email</span>
+              <a href="mailto:heavenection@gmail.com">heavenection@gmail.com</a>
+            </div>
           </div>
         </div>
 
         <div className="footer-bottom">
           <small>Copyright {new Date().getFullYear()} Heavenection. All rights reserved.</small>
-          <div className="footer-links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <small>Powered by INZSOFT TECHNOLOGIES</small>
         </div>
       </footer>
     </div>
