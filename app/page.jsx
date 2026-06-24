@@ -1,31 +1,39 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#promise", label: "Promise" },
+  { href: "#contact", label: "Contact" },
+];
 
 const services = [
   {
     title: "Home loan guidance",
     description:
-      "Help families explore home loan options, compare lenders, and prepare the right paperwork with less stress.",
+      "Help families understand home loan options, compare choices, and prepare for the next step with confidence.",
     accent: "Property support",
   },
   {
     title: "Personal loan assistance",
     description:
-      "Guide customers toward suitable personal loan options for urgent needs, planned expenses, or debt consolidation.",
-    accent: "Quick borrowing",
+      "Guide customers toward suitable personal loan options for urgent needs, planned spending, or balance support.",
+    accent: "Quick support",
   },
   {
     title: "Business loan support",
     description:
-      "Assist small businesses and entrepreneurs in finding lending options for working capital, growth, or equipment.",
-    accent: "Business growth",
+      "Assist business owners in finding lending options for working capital, growth, and equipment planning.",
+    accent: "Growth support",
   },
   {
     title: "Eligibility review",
     description:
-      "Review customer details, income profile, and requirements to suggest loan paths that better match their situation.",
+      "Review customer details carefully so the loan guidance matches the real profile and requirement.",
     accent: "Smart screening",
   },
   {
@@ -42,10 +50,33 @@ const services = [
   },
 ];
 
-const metrics = [
+const stats = [
   { value: "Loan", label: "consultancy focused on customer needs" },
   { value: "Fast", label: "response to new enquiries" },
   { value: "Clear", label: "guidance from enquiry to application" },
+];
+
+const highlights = [
+  "Professional company profile",
+  "Mobile-friendly and responsive",
+  "Premium dark theme with smooth motion",
+  "Trust-first customer presentation",
+  "Enquiry form for quick contact",
+];
+
+const trustPoints = [
+  {
+    title: "Customer-first support",
+    text: "We focus on matching people with loan guidance that feels practical, not confusing.",
+  },
+  {
+    title: "Simple communication",
+    text: "Customers can send an enquiry quickly and get a clear next step from the company team.",
+  },
+  {
+    title: "Professional presentation",
+    text: "The site is designed to make the company feel dependable, modern, and easy to contact.",
+  },
 ];
 
 const process = [
@@ -75,29 +106,6 @@ const process = [
   },
 ];
 
-const highlights = [
-  "Professional loan consultancy profile",
-  "Built to inspire customer trust",
-  "Premium dark theme with smooth motion",
-  "Mobile-first and easy to browse",
-  "Enquiry form routed to the company team",
-];
-
-const trustPoints = [
-  {
-    title: "Customer-first support",
-    text: "We focus on matching people with loan guidance that feels practical, not confusing.",
-  },
-  {
-    title: "Simple communication",
-    text: "Customers can send an enquiry quickly and get a clear next step from the company team.",
-  },
-  {
-    title: "Professional presentation",
-    text: "The site is designed to make the company feel dependable, modern, and easy to contact.",
-  },
-];
-
 const promisePoints = [
   {
     title: "Trust",
@@ -118,35 +126,51 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const handLeftVariants = {
-  hidden: { opacity: 0, x: -140, rotate: -12 },
+const slideInLeft = {
+  hidden: { opacity: 0, x: -120 },
   visible: {
     opacity: 1,
     x: 0,
-    rotate: -2,
-    transition: { type: "spring", stiffness: 120, damping: 16, delay: 0.08 },
+    transition: { type: "spring", stiffness: 120, damping: 18 },
   },
 };
 
-const handRightVariants = {
-  hidden: { opacity: 0, x: 140, rotate: 12 },
+const slideInRight = {
+  hidden: { opacity: 0, x: 120 },
   visible: {
     opacity: 1,
     x: 0,
-    rotate: 2,
-    transition: { type: "spring", stiffness: 120, damping: 16, delay: 0.08 },
+    transition: { type: "spring", stiffness: 120, damping: 18 },
   },
 };
 
-const handshakePopVariants = {
-  hidden: { opacity: 0, scale: 0.8, y: 18 },
+const popIn = {
+  hidden: { opacity: 0, scale: 0.86 },
   visible: {
     opacity: 1,
     scale: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 180, damping: 18, delay: 0.22 },
+    transition: { type: "spring", stiffness: 180, damping: 16 },
   },
 };
+
+function LogoImage({ src, alt, className, fallbackLabel }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return <div className={`logo-fallback ${className || ""}`}>{fallbackLabel}</div>;
+  }
+
+  return (
+    <img
+      className={className}
+      src={src}
+      alt={alt}
+      loading="eager"
+      decoding="async"
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -160,17 +184,6 @@ export default function HomePage() {
     service_interest: "Home loan guidance",
     message: "",
   });
-
-  const navLinks = useMemo(
-    () => [
-      { href: "#about", label: "About" },
-      { href: "#promise", label: "Promise" },
-      { href: "#services", label: "Services" },
-      { href: "#process", label: "Process" },
-      { href: "#contact", label: "Contact" },
-    ],
-    [],
-  );
 
   const handleEnquiryChange = (event) => {
     const { name, value } = event.target;
@@ -221,11 +234,11 @@ export default function HomePage() {
       <header className="topbar">
         <a className="brand" href="#home">
           <span className="brand-mark" aria-hidden="true">
-            <img
-              className="brand-mark-image"
+            <LogoImage
               src="/brand/heavenection-mark.svg"
               alt=""
-              aria-hidden="true"
+              className="brand-mark-image"
+              fallbackLabel="H"
             />
           </span>
           <span className="brand-copy">
@@ -268,16 +281,15 @@ export default function HomePage() {
             variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
           >
             <motion.span className="eyebrow" variants={fadeUp}>
-              Helping people find the right loan guidance
+              A professional loan consultancy presence
             </motion.span>
             <motion.h1 variants={fadeUp}>
-              A trusted loan consultancy website for customers who need clear
-              borrowing advice.
+              A polished company website built to earn trust and welcome new enquiries.
             </motion.h1>
             <motion.p variants={fadeUp}>
-              Heavenection helps people explore loan options, understand the
-              next steps, and connect with a team that can guide them from
-              enquiry to application with confidence.
+              Heavenection helps people explore loan options, understand the next steps,
+              and connect with a team that can guide them from enquiry to application
+              with confidence.
             </motion.p>
 
             <motion.div className="hero-actions" variants={fadeUp}>
@@ -290,7 +302,7 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div className="metric-row" variants={fadeUp}>
-              {metrics.map((metric) => (
+              {stats.map((metric) => (
                 <article key={metric.label} className="metric-card">
                   <strong>{metric.value}</strong>
                   <span>{metric.label}</span>
@@ -309,27 +321,23 @@ export default function HomePage() {
             className="hero-visual"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.75, ease: "easeOut" }}
           >
-            <motion.div
-              className="orb orb-one"
-              animate={{ y: [0, -16, 0], rotate: [0, 8, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              className="orb orb-two"
-              animate={{ y: [0, 12, 0], rotate: [0, -10, 0] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.article
-              className="visual-card visual-card-large"
-              whileHover={{ y: -8, rotate: -1 }}
-            >
-              <span className="card-kicker">Consultancy profile</span>
-              <h3>Loan guidance that feels clear and personal.</h3>
+            <div className="hero-visual-backdrop" aria-hidden="true" />
+            <motion.article className="hero-panel hero-panel-large" variants={popIn} whileHover={{ y: -8 }}>
+              <span className="card-kicker">Company profile</span>
+              <div className="hero-logo-wrap">
+                <LogoImage
+                  src="/brand/heavenection-logo.svg"
+                  alt="Heavenection logo"
+                  className="hero-logo"
+                  fallbackLabel="HEAVENECTION"
+                />
+              </div>
+              <h3>Loan guidance that feels clear, calm, and premium.</h3>
               <p>
-                We help customers understand their options, prepare the right
-                details, and move forward with the loan process calmly.
+                We help customers understand their options, prepare the right details,
+                and move forward through the loan process with confidence.
               </p>
               <div className="dashboard-bars">
                 <span style={{ width: "74%" }} />
@@ -337,11 +345,9 @@ export default function HomePage() {
                 <span style={{ width: "68%" }} />
               </div>
             </motion.article>
-            <motion.article
-              className="visual-card visual-card-small"
-              whileHover={{ y: -8 }}
-            >
-              <span className="card-kicker">Customer focus</span>
+
+            <motion.article className="hero-panel hero-panel-small" variants={popIn} whileHover={{ y: -8 }}>
+              <span className="card-kicker">What customers see</span>
               <ul>
                 <li>
                   <span>Clear advice</span>
@@ -353,23 +359,21 @@ export default function HomePage() {
                 </li>
                 <li>
                   <span>Support</span>
-                  <strong>Responsive</strong>
+                  <strong>Responsive and friendly</strong>
                 </li>
               </ul>
             </motion.article>
-            <motion.article
-              className="visual-card visual-card-stack"
-              whileHover={{ y: -8 }}
-            >
-              <span className="card-kicker">What customers receive</span>
+
+            <motion.article className="hero-panel hero-panel-stack" variants={popIn} whileHover={{ y: -8 }}>
+              <span className="card-kicker">Fast facts</span>
               <div className="stack-row">
                 <div>
                   <strong>Guidance</strong>
-                  <span>On the right loan path</span>
+                  <span>Loan path support</span>
                 </div>
                 <div>
                   <strong>Documentation</strong>
-                  <span>Help with paperwork</span>
+                  <span>Paperwork help</span>
                 </div>
               </div>
               <div className="stack-row">
@@ -379,142 +383,53 @@ export default function HomePage() {
                 </div>
                 <div>
                   <strong>Next step</strong>
-                  <span>Clear enquiry follow-up</span>
+                  <span>Clear follow-up</span>
                 </div>
               </div>
             </motion.article>
+
+            <motion.div
+              className="floating-pill floating-pill-one"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              Trusted support
+            </motion.div>
+            <motion.div
+              className="floating-pill floating-pill-two"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            >
+              Quick response
+            </motion.div>
           </motion.div>
         </section>
 
         <motion.section
           id="about"
-          className="section-split"
+          className="section-block section-about"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <motion.div className="split-copy" variants={fadeUp}>
-            <span className="eyebrow">About Heavenection</span>
-            <h2>Built as a loan consultancy brand with a clear customer focus.</h2>
-            <p>
-              Heavenection is presented here as a professional company profile
-              for customers who want help understanding loan choices. The goal
-              is to look trustworthy, easy to contact, and focused on real
-              customer guidance.
-            </p>
-
-            <div className="feature-list">
-              {trustPoints.map((feature) => (
-                <article key={feature.title} className="feature-card">
-                  <strong>{feature.title}</strong>
-                  <span>{feature.text}</span>
-                </article>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div className="platform-panel" variants={fadeUp}>
-            <article className="platform-card">
-              <span className="card-kicker">Why customers trust us</span>
-              <h3>Simple, steady, and professional loan support.</h3>
-              <div className="platform-grid">
-                <div>
-                  <strong>Customer care</strong>
-                  <span>Friendly response</span>
-                </div>
-                <div>
-                  <strong>Loan clarity</strong>
-                  <span>Practical guidance</span>
-                </div>
-                <div>
-                  <strong>Fast enquiry</strong>
-                  <span>Easy contact flow</span>
-                </div>
-                <div>
-                  <strong>Professional look</strong>
-                  <span>Strong company image</span>
-                </div>
-              </div>
-            </article>
-          </motion.div>
-        </motion.section>
-
-        <motion.section
-          id="promise"
-          className="handshake-section"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.28 }}
+          viewport={{ once: true, amount: 0.18 }}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
         >
           <motion.div className="section-head" variants={fadeUp}>
-            <span className="eyebrow">Company promise</span>
-            <h2>Two sides moving together into one clear solution.</h2>
+            <span className="eyebrow">About Heavenection</span>
+            <h2>Built as a loan consultancy brand with a clear customer focus.</h2>
             <p>
-              As you scroll, the hands meet in the center like a confident
-              partnership animation. It gives the site a more playful, modern
-              feeling while still looking professional.
+              Heavenection is presented here as a professional company profile for
+              customers who want help understanding loan choices. The goal is to look
+              trustworthy, easy to contact, and focused on real customer guidance.
             </p>
           </motion.div>
 
-          <div className="handshake-grid">
-            <motion.div className="handshake-copy" variants={fadeUp}>
-              <article className="feature-card">
-                <strong>Animated handshake</strong>
-                <span>
-                  The hands slide toward each other on scroll, then settle into
-                  a joined moment with a soft pulse.
-                </span>
-              </article>
-              {promisePoints.map((point) => (
-                <motion.article
-                  key={point.title}
-                  className="feature-card handshake-point"
-                  variants={handshakePopVariants}
-                >
-                  <strong>{point.title}</strong>
-                  <span>{point.text}</span>
-                </motion.article>
-              ))}
-            </motion.div>
-
-            <motion.div className="handshake-stage" variants={fadeUp}>
-              <div className="handshake-orbit handshake-orbit-one" aria-hidden="true" />
-              <div className="handshake-orbit handshake-orbit-two" aria-hidden="true" />
-              <motion.div className="handshake-badge handshake-badge-left" variants={handshakePopVariants}>
-                Trust
-              </motion.div>
-              <motion.div className="handshake-badge handshake-badge-right" variants={handshakePopVariants}>
-                Support
-              </motion.div>
-              <motion.div className="handshake-badge handshake-badge-bottom" variants={handshakePopVariants}>
-                Partnership
-              </motion.div>
-
-              <motion.div className="handshake-join" variants={handshakePopVariants}>
-                <span className="handshake-join-core" />
-                <span className="handshake-join-ring ring-one" />
-                <span className="handshake-join-ring ring-two" />
-              </motion.div>
-
-              <motion.div className="handshake-hand handshake-hand-left" variants={handLeftVariants}>
-                <span className="handshake-arm" />
-                <span className="handshake-palm" />
-                <span className="handshake-finger finger-one" />
-                <span className="handshake-finger finger-two" />
-                <span className="handshake-finger finger-three" />
-                <span className="handshake-finger finger-four" />
-              </motion.div>
-
-              <motion.div className="handshake-hand handshake-hand-right" variants={handRightVariants}>
-                <span className="handshake-arm" />
-                <span className="handshake-palm" />
-                <span className="handshake-finger finger-one" />
-                <span className="handshake-finger finger-two" />
-                <span className="handshake-finger finger-three" />
-                <span className="handshake-finger finger-four" />
-              </motion.div>
-            </motion.div>
+          <div className="trust-grid">
+            {trustPoints.map((feature) => (
+              <motion.article key={feature.title} className="trust-card" variants={fadeUp} whileHover={{ y: -8 }}>
+                <strong>{feature.title}</strong>
+                <span>{feature.text}</span>
+              </motion.article>
+            ))}
           </div>
         </motion.section>
 
@@ -523,16 +438,15 @@ export default function HomePage() {
           className="section-block"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.18 }}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
         >
           <motion.div className="section-head" variants={fadeUp}>
             <span className="eyebrow">Services</span>
             <h2>Loan consultancy services designed around real customer needs.</h2>
             <p>
-              The website presents the company as a helpful guide for people
-              looking for loan options, document assistance, and a smoother
-              borrowing journey.
+              The website presents the company as a helpful guide for people looking
+              for loan options, document assistance, and a smoother borrowing journey.
             </p>
           </motion.div>
 
@@ -545,9 +459,7 @@ export default function HomePage() {
                 whileHover={{ y: -10, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
               >
-                <span className="service-index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <span className="service-index">{String(index + 1).padStart(2, "0")}</span>
                 <span className="service-accent">{service.accent}</span>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
@@ -561,7 +473,7 @@ export default function HomePage() {
           className="section-block"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.18 }}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
         >
           <motion.div className="section-head" variants={fadeUp}>
@@ -569,19 +481,82 @@ export default function HomePage() {
             <h2>A simple path from enquiry to loan guidance.</h2>
           </motion.div>
 
-          <div className="workflow-grid">
+          <div className="process-grid">
             {process.map((item) => (
-              <motion.article
-                key={item.step}
-                className="workflow-card"
-                variants={fadeUp}
-                whileHover={{ y: -6 }}
-              >
+              <motion.article key={item.step} className="process-card" variants={fadeUp} whileHover={{ y: -6 }}>
                 <span>{item.step}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </motion.article>
             ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          id="promise"
+          className="section-block promise-section"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.22 }}
+          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+        >
+          <motion.div className="section-head" variants={fadeUp}>
+            <span className="eyebrow">Company promise</span>
+            <h2>Two sides moving together into one clear solution.</h2>
+            <p>
+              As you scroll, the hands meet in the center like a confident partnership
+              animation. It gives the site a modern feeling while still looking
+              professional.
+            </p>
+          </motion.div>
+
+          <div className="promise-grid">
+            <motion.div className="promise-copy" variants={fadeUp}>
+              {promisePoints.map((point) => (
+                <motion.article key={point.title} className="promise-card" variants={popIn} whileHover={{ y: -6 }}>
+                  <strong>{point.title}</strong>
+                  <span>{point.text}</span>
+                </motion.article>
+              ))}
+            </motion.div>
+
+            <motion.div className="promise-stage" variants={fadeUp}>
+              <div className="promise-orbit promise-orbit-one" aria-hidden="true" />
+              <div className="promise-orbit promise-orbit-two" aria-hidden="true" />
+              <motion.div className="promise-badge promise-badge-left" variants={popIn}>
+                Trust
+              </motion.div>
+              <motion.div className="promise-badge promise-badge-right" variants={popIn}>
+                Support
+              </motion.div>
+              <motion.div className="promise-badge promise-badge-bottom" variants={popIn}>
+                Partnership
+              </motion.div>
+
+              <motion.div className="promise-join" variants={popIn}>
+                <span className="promise-join-core" />
+                <span className="promise-join-ring promise-ring-one" />
+                <span className="promise-join-ring promise-ring-two" />
+              </motion.div>
+
+              <motion.div className="promise-hand promise-hand-left" variants={slideInLeft}>
+                <span className="promise-arm" />
+                <span className="promise-palm" />
+                <span className="promise-finger finger-one" />
+                <span className="promise-finger finger-two" />
+                <span className="promise-finger finger-three" />
+                <span className="promise-finger finger-four" />
+              </motion.div>
+
+              <motion.div className="promise-hand promise-hand-right" variants={slideInRight}>
+                <span className="promise-arm" />
+                <span className="promise-palm" />
+                <span className="promise-finger finger-one" />
+                <span className="promise-finger finger-two" />
+                <span className="promise-finger finger-three" />
+                <span className="promise-finger finger-four" />
+              </motion.div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -597,8 +572,8 @@ export default function HomePage() {
             <span className="eyebrow">Enquiry</span>
             <h2>Request loan guidance from the Heavenection team.</h2>
             <p>
-              Share your details and what kind of loan help you need. The team
-              can review the enquiry and follow up with the next steps.
+              Share your details and what kind of loan help you need. The team can
+              review the enquiry and follow up with the next steps.
             </p>
 
             <div className="contact-points">
@@ -680,7 +655,7 @@ export default function HomePage() {
               <button type="submit" className="button button-primary" disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Submit enquiry"}
               </button>
-              <a className="button button-secondary" href="mailto:hello@heavenection.com">
+              <a className="button button-secondary" href="mailto:heavenection@gmail.com">
                 Email the team
               </a>
             </div>
@@ -689,24 +664,56 @@ export default function HomePage() {
       </main>
 
       <footer className="footer">
-        <div>
-          <img
-            className="footer-logo"
-            src="/brand/heavenection-logo.svg"
-            alt="Heavenection logo"
-          />
-          <p>Loan consultancy support for customers who want clear guidance and a professional experience.</p>
+        <div className="footer-brand">
+          <div className="footer-brand-row">
+            <span className="footer-mark">
+              <LogoImage
+                src="/brand/heavenection-mark.svg"
+                alt=""
+                className="footer-mark-image"
+                fallbackLabel="H"
+              />
+            </span>
+            <div>
+              <strong>Heavenection</strong>
+              <span>Loan consultancy</span>
+            </div>
+          </div>
+          <p>
+            Professional loan consultancy support for customers who want clear
+            guidance and a dependable first impression.
+          </p>
         </div>
-        <div className="footer-links">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
+
+        <div className="footer-columns">
+          <div className="footer-column">
+            <span>Address</span>
+            <p>16/2561, Opposite CSI Church</p>
+            <p>Kattappana, Idukki, Kerala - 685508</p>
+          </div>
+          <div className="footer-column">
+            <span>Contact</span>
+            <a href="tel:9846262047">9846262047</a>
+            <a href="mailto:heavenection@gmail.com">heavenection@gmail.com</a>
+          </div>
+          <div className="footer-column">
+            <span>Company</span>
+            <p>Heavenection</p>
+            <p>Powered by INZSOFT TECHNOLOGIES</p>
+          </div>
         </div>
-        <small>Copyright {new Date().getFullYear()} Heavenection. All rights reserved.</small>
+
+        <div className="footer-bottom">
+          <small>Copyright {new Date().getFullYear()} Heavenection. All rights reserved.</small>
+          <div className="footer-links">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </footer>
     </div>
   );
 }
-
