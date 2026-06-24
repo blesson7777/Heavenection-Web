@@ -75,22 +75,20 @@ const stagger = {
   },
 };
 
-const handLeft = {
-  hidden: { opacity: 0, x: -120, rotate: -7 },
+const panelLeft = {
+  hidden: { opacity: 0, x: -90 },
   visible: {
     opacity: 1,
     x: 0,
-    rotate: -2,
     transition: { type: "spring", stiffness: 115, damping: 18 },
   },
 };
 
-const handRight = {
-  hidden: { opacity: 0, x: 120, rotate: 7 },
+const panelRight = {
+  hidden: { opacity: 0, x: 90 },
   visible: {
     opacity: 1,
     x: 0,
-    rotate: 2,
     transition: { type: "spring", stiffness: 115, damping: 18 },
   },
 };
@@ -318,7 +316,7 @@ export default function HomePage() {
         >
           <motion.div className="promise-copy" variants={fadeUp}>
             <span>Our promise</span>
-            <h2>Two hands meeting in the middle: your need and our support.</h2>
+            <h2>Your need and our support move toward one clear next step.</h2>
             <p>
               The experience is designed to feel personal, respectful, and steady from the
               first request to the final guidance.
@@ -330,29 +328,51 @@ export default function HomePage() {
             </ul>
           </motion.div>
 
-          <motion.div className="handshake-stage" variants={fadeUp} aria-hidden="true">
-            <motion.div className="hand hand-left" variants={handLeft}>
-              <span className="arm" />
-              <span className="palm" />
-              <span className="finger finger-one" />
-              <span className="finger finger-two" />
-              <span className="finger finger-three" />
-              <span className="finger finger-four" />
+          <motion.div className="connection-stage" variants={fadeUp} aria-hidden="true">
+            <motion.div className="connection-card need-card" variants={panelLeft}>
+              <span>Customer need</span>
+              <strong>Home, personal, or business support</strong>
             </motion.div>
-            <motion.div className="hand hand-right" variants={handRight}>
-              <span className="arm" />
-              <span className="palm" />
-              <span className="finger finger-one" />
-              <span className="finger finger-two" />
-              <span className="finger finger-three" />
-              <span className="finger finger-four" />
+            <motion.div className="connection-card support-card-visual" variants={panelRight}>
+              <span>Heavenection support</span>
+              <strong>Clear guidance and next steps</strong>
             </motion.div>
             <motion.div
-              className="handshake-glow"
-              initial={{ opacity: 0, scale: 0.6 }}
+              className="connection-line"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: 0.18, duration: 0.75, ease: "easeOut" }}
+            />
+            <motion.div
+              className="connection-center"
+              initial={{ opacity: 0, scale: 0.7 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.28, duration: 0.7, ease: "easeOut" }}
+              transition={{ delay: 0.42, type: "spring", stiffness: 180, damping: 15 }}
+            >
+              <span>Clear path</span>
+            </motion.div>
+            <motion.div
+              className="connection-dot dot-one"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: 0.55 }}
+            />
+            <motion.div
+              className="connection-dot dot-two"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: 0.68 }}
+            />
+            <motion.div
+              className="connection-dot dot-three"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: 0.81 }}
             />
           </motion.div>
         </motion.section>

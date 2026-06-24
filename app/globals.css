@@ -528,156 +528,153 @@ textarea {
   background: var(--gold);
 }
 
-.handshake-stage {
+.connection-stage {
   position: relative;
   min-height: 460px;
   overflow: hidden;
 }
 
-.handshake-stage::before {
+.connection-stage::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 340px;
-  height: 340px;
+  width: 410px;
+  height: 410px;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
 }
 
-.hand {
-  position: absolute;
-  top: 50%;
-  width: 310px;
-  height: 150px;
-  transform: translateY(-50%);
-}
-
-.hand-left {
-  left: 2%;
-}
-
-.hand-right {
-  right: 2%;
-}
-
-.arm,
-.palm,
-.finger {
-  position: absolute;
-  background: linear-gradient(180deg, #fff8ec, #ecc9a0);
-  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
-}
-
-.arm {
-  top: 56px;
-  width: 180px;
-  height: 30px;
-  border-radius: 999px;
-}
-
-.hand-left .arm {
-  left: 0;
-  transform: rotate(10deg);
-  transform-origin: left center;
-}
-
-.hand-right .arm {
-  right: 0;
-  transform: rotate(-10deg);
-  transform-origin: right center;
-}
-
-.palm {
-  top: 48px;
-  width: 76px;
-  height: 72px;
-  border-radius: 28px;
-}
-
-.hand-left .palm {
-  left: 118px;
-  transform: rotate(-5deg);
-}
-
-.hand-right .palm {
-  right: 118px;
-  transform: rotate(5deg);
-}
-
-.finger {
-  width: 19px;
-  border-radius: 999px;
-}
-
-.hand-left .finger-one {
-  left: 182px;
-  top: 28px;
-  height: 62px;
-  transform: rotate(-12deg);
-}
-
-.hand-left .finger-two {
-  left: 200px;
-  top: 34px;
-  height: 54px;
-  transform: rotate(-5deg);
-}
-
-.hand-left .finger-three {
-  left: 218px;
-  top: 40px;
-  height: 46px;
-  transform: rotate(3deg);
-}
-
-.hand-left .finger-four {
-  left: 236px;
-  top: 48px;
-  height: 36px;
-  transform: rotate(11deg);
-}
-
-.hand-right .finger-one {
-  right: 182px;
-  top: 28px;
-  height: 62px;
-  transform: rotate(12deg);
-}
-
-.hand-right .finger-two {
-  right: 200px;
-  top: 34px;
-  height: 54px;
-  transform: rotate(5deg);
-}
-
-.hand-right .finger-three {
-  right: 218px;
-  top: 40px;
-  height: 46px;
-  transform: rotate(-3deg);
-}
-
-.hand-right .finger-four {
-  right: 236px;
-  top: 48px;
-  height: 36px;
-  transform: rotate(-11deg);
-}
-
-.handshake-glow {
+.connection-stage::after {
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 130px;
-  height: 130px;
+  width: 270px;
+  height: 270px;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+}
+
+.connection-card {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  gap: 10px;
+  width: min(270px, 42%);
+  min-height: 130px;
+  padding: 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+
+.connection-card span {
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.connection-card strong {
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.need-card {
+  left: 0;
+  top: 110px;
+}
+
+.support-card-visual {
+  right: 0;
+  bottom: 110px;
+}
+
+.connection-line {
+  position: absolute;
+  z-index: 2;
+  left: 18%;
+  right: 18%;
+  top: 50%;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), #ffffff, var(--green));
+  transform-origin: left;
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.25);
+}
+
+.connection-center {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 142px;
+  height: 142px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(201, 150, 61, 0.5) 45%, rgba(255, 255, 255, 0) 72%);
-  animation: pulse 3.4s infinite ease-in-out;
+  color: var(--ink);
+  background: var(--paper-strong);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
 }
+
+.connection-center::before {
+  content: "";
+  position: absolute;
+  width: 46px;
+  height: 24px;
+  border-left: 7px solid var(--green);
+  border-bottom: 7px solid var(--green);
+  transform: translateY(-15px) rotate(-45deg);
+  border-radius: 3px;
+}
+
+.connection-center span {
+  align-self: end;
+  padding-bottom: 26px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--brand-deep);
+}
+
+.connection-dot {
+  position: absolute;
+  z-index: 5;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 0 8px rgba(201, 150, 61, 0.12);
+}
+
+.dot-one {
+  left: 25%;
+  top: 48%;
+}
+
+.dot-two {
+  left: 50%;
+  top: 28%;
+  background: var(--white);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.12);
+}
+
+.dot-three {
+  right: 25%;
+  bottom: 48%;
+  background: var(--green);
+  box-shadow: 0 0 0 8px rgba(65, 106, 87, 0.18);
+}
+
 
 .contact-band {
   display: grid;
@@ -866,7 +863,7 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .handshake-stage {
+  .connection-stage {
     min-height: 420px;
   }
 }
@@ -930,25 +927,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .hand {
-    width: 244px;
-  }
-
-  .hand-left {
-    left: -22px;
-  }
-
-  .hand-right {
-    right: -22px;
-  }
-
-  .arm {
-    width: 138px;
-  }
-
-  .palm {
-    width: 62px;
-    height: 62px;
+  .connection-card {
+    width: min(240px, 44%);
+    min-height: 116px;
+    padding: 18px;
   }
 }
 
@@ -1006,30 +988,48 @@ textarea {
     top: 34px;
   }
 
-  .handshake-stage {
-    min-height: 340px;
+  .connection-stage {
+    min-height: 430px;
   }
 
-  .hand {
-    width: 204px;
-    height: 120px;
+  .connection-stage::before {
+    width: 300px;
+    height: 300px;
   }
 
-  .hand-left {
-    left: -48px;
+  .connection-stage::after {
+    width: 210px;
+    height: 210px;
   }
 
-  .hand-right {
-    right: -48px;
+  .connection-card {
+    width: 78%;
+    min-height: auto;
   }
 
-  .finger {
-    width: 15px;
+  .need-card {
+    left: 0;
+    top: 24px;
   }
 
-  .handshake-glow {
-    width: 96px;
-    height: 96px;
+  .support-card-visual {
+    right: 0;
+    bottom: 24px;
+  }
+
+  .connection-line {
+    left: 10%;
+    right: 10%;
+  }
+
+  .connection-center {
+    width: 118px;
+    height: 118px;
+  }
+
+  .connection-center::before {
+    width: 38px;
+    height: 20px;
   }
 
   .footer-brand {
