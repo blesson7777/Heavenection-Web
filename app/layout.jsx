@@ -18,8 +18,8 @@ export const metadata = {
   description:
     "Heavenection helps customers explore financial options, understand the next step, and request friendly guidance through the company website.",
   icons: {
-    icon: "/brand/heavenection-mark.svg",
-    apple: "/brand/heavenection-mark.svg",
+    icon: "/brand/admin-heavenection-logo.png",
+    apple: "/brand/admin-heavenection-logo.png",
   },
 };
 

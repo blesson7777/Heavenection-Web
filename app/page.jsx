@@ -176,7 +176,7 @@ export default function HomePage() {
         <a className="brand" href="#home" aria-label="Heavenection home">
           <span className="brand-mark" aria-hidden="true">
             <LogoImage
-              src="/brand/heavenection-mark.svg"
+              src="/brand/admin-heavenection-logo.png"
               className="brand-mark-image"
               fallbackLabel="H"
             />
@@ -229,7 +229,7 @@ export default function HomePage() {
           <motion.div className="hero-content" initial="hidden" animate="visible" variants={stagger}>
             <motion.div className="hero-logo-panel" variants={fadeUp}>
               <LogoImage
-                src="/brand/heavenection-logo.svg"
+                src="/brand/admin-heavenection-logo.png"
                 alt="Heavenection"
                 className="hero-logo"
                 fallbackLabel="HEAVENECTION"
@@ -448,7 +448,7 @@ export default function HomePage() {
           <div className="footer-brand">
             <span className="footer-mark" aria-hidden="true">
               <LogoImage
-                src="/brand/heavenection-mark.svg"
+                src="/brand/admin-heavenection-logo.png"
                 className="footer-mark-image"
                 fallbackLabel="H"
               />
