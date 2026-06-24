@@ -31,3 +31,7 @@ npm start
 ## Environment
 
 Set `BACKEND_API_URL` to the Railway backend base URL so the enquiry form can proxy submissions into the admin panel.
+
+## Railway Deploy
+
+This repo includes a `Dockerfile`, so Railway can build the app with Node 20.11.1 and avoid the older npm production install path that emits warnings.
