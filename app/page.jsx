@@ -1,46 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { companyContact, faqs, services, testimonials, trustReasons } from "./site-data";
 
 const navLinks = [
   { href: "#support", label: "Support" },
+  { href: "#trust", label: "Why us" },
   { href: "#journey", label: "How it works" },
+  { href: "#faq", label: "FAQ" },
   { href: "#promise", label: "Promise" },
   { href: "#contact", label: "Contact" },
-];
-
-const supportOptions = [
-  {
-    title: "Personal & Home Loans",
-    text: "Get quick approval support for personal and home loans with suitable rates and flexible repayment options.",
-    tag: "Personal & home",
-  },
-  {
-    title: "Business & Property Loans",
-    text: "Secure funding for your business or unlock property value with expert guidance and easy processing.",
-    tag: "Business & property",
-  },
-  {
-    title: "Vehicle Loans",
-    text: "Finance your dream car or bike with new, used, and top-up loan options at competitive rates.",
-    tag: "Vehicle finance",
-  },
-  {
-    title: "Loan Solutions",
-    text: "We help with loan consolidation, takeover, and reducing interest burden through smart financial planning.",
-    tag: "Smart planning",
-  },
-  {
-    title: "Insurance Services",
-    text: "Protect your future with health, life, and vehicle insurance plans tailored to your needs.",
-    tag: "Protection",
-  },
-  {
-    title: "Education & Financial Support",
-    text: "Get assistance with college admissions, education loans, and credit card financial solutions.",
-    tag: "Education support",
-  },
 ];
 
 const steps = [
@@ -68,6 +38,8 @@ const promiseItems = [
   "Fast response for new requests",
   "Respectful follow-up without confusion",
 ];
+
+const supportOptions = services;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 34 },
@@ -145,6 +117,24 @@ export default function HomePage() {
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const selectedService = params.get("service");
+    if (selectedService && supportOptions.some((item) => item.title === selectedService)) {
+      setFormData((current) => ({ ...current, service_interest: selectedService }));
+    }
+  }, []);
+
+  const buildTrackedPageUrl = () => {
+    if (typeof window === "undefined") {
+      return "";
+    }
+    const trackedUrl = new URL(window.location.href);
+    trackedUrl.searchParams.set("source", "website");
+    trackedUrl.searchParams.set("selected", formData.service_interest);
+    return trackedUrl.toString();
+  };
+
   const handleEnquirySubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -157,7 +147,8 @@ export default function HomePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          page_url: typeof window !== "undefined" ? window.location.href : "",
+          message: `${formData.message}\n\nWebsite selected service: ${formData.service_interest}`,
+          page_url: buildTrackedPageUrl(),
         }),
       });
 
@@ -183,6 +174,29 @@ export default function HomePage() {
 
   return (
     <div className="site-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            name: "Heavenection",
+            url: "https://www.heavenection.com",
+            telephone: companyContact.phone,
+            email: companyContact.email,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: companyContact.addressLineOne,
+              addressLocality: "Kattappana",
+              addressRegion: "Kerala",
+              postalCode: "685508",
+              addressCountry: "IN",
+            },
+            areaServed: "Kerala",
+            serviceType: services.map((service) => service.title),
+          }),
+        }}
+      />
       <motion.div className="scroll-progress" style={{ scaleX: smoothScrollProgress }} />
       <header className="topbar">
         <a className="brand" href="#home" aria-label="Heavenection home">
@@ -269,7 +283,7 @@ export default function HomePage() {
                 Talk to us
               </a>
               <a className="button button-light" href="tel:9846262047">
-                Call 9846262047
+                Call {companyContact.phone}
               </a>
             </motion.div>
           </motion.div>
@@ -300,7 +314,42 @@ export default function HomePage() {
                 <span>{item.tag}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
+                <a className="text-link" href={`/services/${item.slug}`}>
+                  View details
+                </a>
               </motion.article>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          id="trust"
+          className="section-band trust-band"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.18 }}
+          variants={stagger}
+        >
+          <motion.div className="section-heading" variants={fadeUp}>
+            <span>Why customers choose us</span>
+            <h2>Clear support before customers make important decisions.</h2>
+          </motion.div>
+
+          <div className="trust-grid">
+            {trustReasons.map((item) => (
+              <motion.article className="trust-card" key={item.title} variants={fadeUp}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="testimonial-row">
+            {testimonials.map((item) => (
+              <motion.figure className="testimonial-card" key={item.name} variants={fadeUp}>
+                <blockquote>{item.text}</blockquote>
+                <figcaption>{item.name}</figcaption>
+              </motion.figure>
             ))}
           </div>
         </motion.section>
@@ -412,6 +461,29 @@ export default function HomePage() {
         </motion.section>
 
         <motion.section
+          id="faq"
+          className="section-band faq-band"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.18 }}
+          variants={stagger}
+        >
+          <motion.div className="section-heading" variants={fadeUp}>
+            <span>Questions customers ask</span>
+            <h2>Simple answers before sending a request.</h2>
+          </motion.div>
+
+          <div className="faq-list">
+            {faqs.map((item) => (
+              <motion.details className="faq-item" key={item.question} variants={fadeUp}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </motion.details>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
           id="contact"
           className="contact-band"
           initial="hidden"
@@ -426,6 +498,21 @@ export default function HomePage() {
               Share your details below. The Heavenection team will review it and get back
               to you with a clear next step.
             </p>
+            <div className="location-panel">
+              <strong>Visit us</strong>
+              <p>{companyContact.addressLineOne}</p>
+              <p>{companyContact.addressLineTwo}</p>
+              <a href={companyContact.mapUrl} target="_blank" rel="noreferrer">
+                Open location
+              </a>
+              <iframe
+                className="map-frame"
+                title="Heavenection location"
+                src="https://maps.google.com/maps?q=Opposite%20CSI%20Church%20Kattappana%20Idukki%20Kerala%20685508&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </motion.div>
 
           <motion.form
@@ -503,6 +590,20 @@ export default function HomePage() {
         </motion.section>
       </main>
 
+      <div className="floating-actions" aria-label="Quick contact">
+        <a className="whatsapp-action" href={companyContact.whatsapp} target="_blank" rel="noreferrer">
+          WhatsApp
+        </a>
+        <a className="call-action" href={`tel:${companyContact.phone}`}>
+          Call
+        </a>
+      </div>
+
+      <div className="mobile-sticky-actions">
+        <a href={`tel:${companyContact.phone}`}>Call</a>
+        <a href="#contact">Send request</a>
+      </div>
+
       <footer className="footer">
         <div className="footer-main">
           <div className="footer-brand">
@@ -522,16 +623,16 @@ export default function HomePage() {
           <div className="footer-contact">
             <div>
               <span>Address</span>
-              <p>16/2561, Opposite CSI Church</p>
-              <p>Kattappana, Idukki, Kerala - 685508</p>
+              <p>{companyContact.addressLineOne}</p>
+              <p>{companyContact.addressLineTwo}</p>
             </div>
             <div>
               <span>Phone</span>
-              <a href="tel:9846262047">9846262047</a>
+              <a href={`tel:${companyContact.phone}`}>{companyContact.phone}</a>
             </div>
             <div>
               <span>Email</span>
-              <a href="mailto:heavenection@gmail.com">heavenection@gmail.com</a>
+              <a href={`mailto:${companyContact.email}`}>{companyContact.email}</a>
             </div>
           </div>
         </div>
