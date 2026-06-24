@@ -73,6 +73,18 @@ textarea {
   overflow: hidden;
 }
 
+.scroll-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 40;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--brand), var(--green));
+  transform-origin: left;
+  box-shadow: 0 8px 22px rgba(77, 92, 144, 0.28);
+}
+
 .topbar {
   position: sticky;
   top: 0;
@@ -206,6 +218,29 @@ textarea {
   background: rgba(255, 255, 255, 0.78);
 }
 
+.topbar-action,
+.button {
+  position: relative;
+  overflow: hidden;
+}
+
+.topbar-action::after,
+.button::after {
+  content: "";
+  position: absolute;
+  inset: -1px auto -1px -35%;
+  width: 30%;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.topbar-action:hover::after,
+.button:hover::after {
+  animation: buttonShine 0.85s ease;
+}
+
 .topbar-action:hover,
 .button:hover {
   transform: translateY(-2px);
@@ -310,6 +345,7 @@ textarea {
   flex: 0 0 auto;
   border-radius: 18px;
   background: var(--brand);
+  animation: softFloat 5.8s ease-in-out infinite;
 }
 
 .hero-logo-copy {
@@ -416,6 +452,8 @@ textarea {
 }
 
 .support-card {
+  position: relative;
+  overflow: hidden;
   min-height: 270px;
   display: grid;
   align-content: start;
@@ -425,6 +463,43 @@ textarea {
   border: 1px solid var(--line);
   background: var(--white);
   box-shadow: 0 14px 42px rgba(23, 32, 54, 0.08);
+  transition: box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.support-card::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 0;
+  height: 5px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, var(--brand), var(--gold), var(--green));
+  transform: translateY(-100%);
+  transition: transform 0.28s ease;
+}
+
+.support-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(77, 92, 144, 0.08), transparent 48%);
+  transform: translateX(-110%);
+  transition: transform 0.55s ease;
+  pointer-events: none;
+}
+
+.support-card:hover {
+  border-color: rgba(77, 92, 144, 0.26);
+  box-shadow: 0 24px 58px rgba(23, 32, 54, 0.15);
+}
+
+.support-card:hover::before {
+  transform: translateY(0);
+}
+
+.support-card:hover::after {
+  transform: translateX(110%);
 }
 
 .support-card:nth-child(2),
@@ -497,6 +572,7 @@ textarea {
   align-items: start;
   width: min(860px, 100%);
   padding: 24px 0;
+  transition: color 0.2s ease;
 }
 
 .journey-step::before {
@@ -521,6 +597,12 @@ textarea {
   color: var(--white);
   background: var(--brand);
   font-weight: 900;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.journey-step:hover span {
+  transform: scale(1.06);
+  box-shadow: 0 16px 32px rgba(77, 92, 144, 0.22);
 }
 
 .promise-band {
@@ -645,6 +727,16 @@ textarea {
   background: linear-gradient(90deg, var(--gold), #ffffff, var(--green));
   transform-origin: left;
   box-shadow: 0 0 28px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+.connection-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  animation: lineFlow 2.7s infinite ease-in-out;
 }
 
 .connection-center {
@@ -661,6 +753,7 @@ textarea {
   color: var(--ink);
   background: var(--paper-strong);
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
+  animation: centerPulse 3.8s infinite ease-in-out;
 }
 
 .connection-center::before {
@@ -733,6 +826,11 @@ textarea {
   background: var(--white);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+  transition: box-shadow 0.28s ease;
+}
+
+.contact-form:hover {
+  box-shadow: 0 30px 82px rgba(23, 32, 54, 0.2);
 }
 
 .contact-form label {
@@ -869,6 +967,54 @@ textarea {
   to {
     transform: translateX(54px);
     opacity: 0.05;
+  }
+}
+
+@keyframes buttonShine {
+  0% {
+    opacity: 0;
+    transform: translateX(0) skewX(-18deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(520%) skewX(-18deg);
+  }
+}
+
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes lineFlow {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(260%);
+    opacity: 0;
+  }
+}
+
+@keyframes centerPulse {
+  0%,
+  100% {
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22), 0 0 0 0 rgba(255, 255, 255, 0.18);
+  }
+  50% {
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22), 0 0 0 16px rgba(255, 255, 255, 0);
   }
 }
 

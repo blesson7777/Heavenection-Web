@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 const navLinks = [
   { href: "#support", label: "Support" },
@@ -135,7 +135,10 @@ export default function HomePage() {
     message: "",
   });
   const { scrollYProgress } = useScroll();
+  const smoothScrollProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
   const roadProgress = useTransform(scrollYProgress, [0.08, 0.62], ["0%", "100%"]);
+  const heroMediaY = useTransform(scrollYProgress, [0, 0.24], ["0px", "-78px"]);
+  const heroContentY = useTransform(scrollYProgress, [0, 0.18], ["0px", "34px"]);
 
   const handleEnquiryChange = (event) => {
     const { name, value } = event.target;
@@ -180,6 +183,7 @@ export default function HomePage() {
 
   return (
     <div className="site-shell">
+      <motion.div className="scroll-progress" style={{ scaleX: smoothScrollProgress }} />
       <header className="topbar">
         <a className="brand" href="#home" aria-label="Heavenection home">
           <span className="brand-mark" aria-hidden="true">
@@ -221,6 +225,7 @@ export default function HomePage() {
         <section className="hero-section">
           <motion.div
             className="hero-media"
+            style={{ y: heroMediaY }}
             initial={{ scale: 1.04, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
@@ -234,7 +239,13 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <motion.div className="hero-content" initial="hidden" animate="visible" variants={stagger}>
+          <motion.div
+            className="hero-content"
+            style={{ y: heroContentY }}
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
             <motion.div className="hero-logo-panel" variants={fadeUp}>
               <span className="hero-logo-mark" aria-hidden="true">
                 <LogoImage
@@ -278,8 +289,14 @@ export default function HomePage() {
           </motion.div>
 
           <div className="support-grid">
-            {supportOptions.map((item) => (
-              <motion.article className="support-card" key={item.title} variants={fadeUp}>
+            {supportOptions.map((item, index) => (
+              <motion.article
+                className="support-card"
+                key={item.title}
+                variants={fadeUp}
+                whileHover={{ y: -10, rotate: index % 2 === 0 ? 0.45 : -0.45 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+              >
                 <span>{item.tag}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
@@ -310,6 +327,8 @@ export default function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.32 }}
                 variants={fadeUp}
+                whileHover={{ x: 10 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
               >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
@@ -409,7 +428,13 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <motion.form className="contact-form" onSubmit={handleEnquirySubmit} variants={fadeUp}>
+          <motion.form
+            className="contact-form"
+            onSubmit={handleEnquirySubmit}
+            variants={fadeUp}
+            whileHover={{ y: -4 }}
+            transition={{ type: "spring", stiffness: 220, damping: 24 }}
+          >
             <label>
               <span>Name</span>
               <input
