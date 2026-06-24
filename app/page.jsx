@@ -226,12 +226,17 @@ export default function HomePage() {
 
           <motion.div className="hero-content" initial="hidden" animate="visible" variants={stagger}>
             <motion.div className="hero-logo-panel" variants={fadeUp}>
-              <LogoImage
-                src="/brand/admin-heavenection-logo.png"
-                alt="Heavenection"
-                className="hero-logo"
-                fallbackLabel="HEAVENECTION"
-              />
+              <span className="hero-logo-mark" aria-hidden="true">
+                <LogoImage
+                  src="/brand/admin-heavenection-logo.png"
+                  className="hero-logo-mark-image"
+                  fallbackLabel="H"
+                />
+              </span>
+              <span className="hero-logo-copy">
+                <strong>Heavenection</strong>
+                <small>Connecting to happiness</small>
+              </span>
             </motion.div>
             <motion.h1 variants={fadeUp}>Financial support made easier for real people.</motion.h1>
             <motion.p variants={fadeUp}>
