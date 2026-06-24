@@ -4,9 +4,17 @@
   "private": true,
   "description": "Responsive company website for Heavenection.",
   "scripts": {
-    "start": "node server.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "framer-motion": "^12.41.0",
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }

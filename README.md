@@ -1,18 +1,26 @@
 # Heavenection Web
 
-Responsive company website for Heavenection.
+Next.js company website for Heavenection with a premium dark design and animated storytelling.
 
-## What is included
+## Features
 
-- Bold landing page with a modern hero section
-- Services area for lead management, telecalling, follow-up workflow, staff performance, salary tracking, and mobile app support
-- Platform overview and workflow timeline
-- Mobile-friendly navigation and reveal animations
+- Animated hero section
+- Services showcase
+- Platform highlights
+- Workflow timeline
+- Mobile navigation
+- Railway-ready Next.js deployment
 
 ## Run locally
 
-Open `index.html` in a browser or serve the folder with any static web server.
+```bash
+npm install
+npm run dev
+```
 
-## Deploy
+## Build
 
-This repo is ready for GitHub Pages or any static hosting provider.
+```bash
+npm run build
+npm start
+```
