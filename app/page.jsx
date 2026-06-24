@@ -395,7 +395,7 @@ export default function HomePage() {
         >
           <motion.div className="split-copy" variants={fadeUp}>
             <span className="eyebrow">About Heavenection</span>
-            <h2>Built as a loan consultancy brand, not a software demo.</h2>
+            <h2>Built as a loan consultancy brand with a clear customer focus.</h2>
             <p>
               Heavenection is presented here as a professional company profile
               for customers who want help understanding loan choices. The goal
@@ -704,8 +704,9 @@ export default function HomePage() {
             </a>
           ))}
         </div>
-        <small>© {new Date().getFullYear()} Heavenection. Built with Next.js.</small>
+        <small>Copyright {new Date().getFullYear()} Heavenection. All rights reserved.</small>
       </footer>
     </div>
   );
 }
+
