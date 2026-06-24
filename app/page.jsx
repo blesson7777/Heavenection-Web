@@ -12,24 +12,34 @@ const navLinks = [
 
 const supportOptions = [
   {
-    title: "Home finance help",
-    text: "Friendly guidance for families planning a new home, construction, or property purchase.",
-    tag: "For families",
+    title: "Personal & Home Loans",
+    text: "Get quick approval support for personal and home loans with suitable rates and flexible repayment options.",
+    tag: "Personal & home",
   },
   {
-    title: "Personal finance support",
-    text: "Simple help for urgent needs, planned expenses, or a better way to handle monthly commitments.",
-    tag: "For individuals",
+    title: "Business & Property Loans",
+    text: "Secure funding for your business or unlock property value with expert guidance and easy processing.",
+    tag: "Business & property",
   },
   {
-    title: "Business funding help",
-    text: "Support for shop owners, self-employed customers, and growing businesses that need working capital.",
-    tag: "For business",
+    title: "Vehicle Loans",
+    text: "Finance your dream car or bike with new, used, and top-up loan options at competitive rates.",
+    tag: "Vehicle finance",
   },
   {
-    title: "Document guidance",
-    text: "A calm check of the details and papers needed before moving ahead with an application.",
-    tag: "For clarity",
+    title: "Loan Solutions",
+    text: "We help with loan consolidation, takeover, and reducing interest burden through smart financial planning.",
+    tag: "Smart planning",
+  },
+  {
+    title: "Insurance Services",
+    text: "Protect your future with health, life, and vehicle insurance plans tailored to your needs.",
+    tag: "Protection",
+  },
+  {
+    title: "Education & Financial Support",
+    text: "Get assistance with college admissions, education loans, and credit card financial solutions.",
+    tag: "Education support",
   },
 ];
 
@@ -121,7 +131,7 @@ export default function HomePage() {
     name: "",
     phone: "",
     email: "",
-    service_interest: "Home finance help",
+    service_interest: "Personal & Home Loans",
     message: "",
   });
   const { scrollYProgress } = useScroll();
@@ -158,7 +168,7 @@ export default function HomePage() {
         name: "",
         phone: "",
         email: "",
-        service_interest: "Home finance help",
+        service_interest: "Personal & Home Loans",
         message: "",
       });
     } catch (error) {

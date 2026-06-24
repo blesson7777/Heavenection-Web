@@ -411,7 +411,7 @@ textarea {
 
 .support-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -427,11 +427,13 @@ textarea {
   box-shadow: 0 14px 42px rgba(23, 32, 54, 0.08);
 }
 
-.support-card:nth-child(2) {
+.support-card:nth-child(2),
+.support-card:nth-child(5) {
   border-top: 5px solid var(--green);
 }
 
-.support-card:nth-child(3) {
+.support-card:nth-child(3),
+.support-card:nth-child(6) {
   border-top: 5px solid var(--gold);
 }
 
