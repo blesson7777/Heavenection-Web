@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.9.0"
   },
   "dependencies": {
     "framer-motion": "^12.41.0",

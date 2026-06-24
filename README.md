@@ -14,6 +14,8 @@ Next.js company website for Heavenection with a premium dark design and animated
 
 ## Run locally
 
+> Requires Node.js 20.9.0 or newer.
+
 ```bash
 npm install
 npm run dev
