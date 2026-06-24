@@ -1,15 +1,15 @@
 :root {
   --bg: #050b16;
-  --surface: rgba(13, 22, 41, 0.78);
-  --surface-strong: rgba(18, 30, 54, 0.92);
-  --line: rgba(158, 183, 225, 0.16);
+  --surface: rgba(15, 24, 48, 0.78);
+  --surface-strong: rgba(23, 33, 66, 0.92);
+  --line: rgba(148, 166, 217, 0.18);
   --text: #f4f7ff;
-  --muted: rgba(224, 232, 255, 0.73);
-  --muted-strong: rgba(224, 232, 255, 0.88);
-  --primary: #7ecbff;
-  --primary-strong: #4da1ff;
-  --accent: #7cf0c7;
-  --accent-2: #ffb36d;
+  --muted: rgba(225, 231, 249, 0.76);
+  --muted-strong: rgba(225, 231, 249, 0.92);
+  --primary: #4d5c90;
+  --primary-strong: #6677b3;
+  --accent: #8b9fd7;
+  --accent-2: #d1b9ff;
   --shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
   --radius-xl: 32px;
   --radius-lg: 24px;
@@ -33,9 +33,9 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   background:
-    radial-gradient(circle at 15% 10%, rgba(78, 161, 255, 0.22), transparent 28%),
-    radial-gradient(circle at 85% 15%, rgba(124, 240, 199, 0.18), transparent 22%),
-    radial-gradient(circle at 70% 85%, rgba(255, 179, 109, 0.14), transparent 24%),
+    radial-gradient(circle at 15% 10%, rgba(77, 92, 144, 0.34), transparent 28%),
+    radial-gradient(circle at 85% 15%, rgba(102, 119, 179, 0.22), transparent 22%),
+    radial-gradient(circle at 70% 85%, rgba(139, 159, 215, 0.14), transparent 24%),
     linear-gradient(180deg, #050b16 0%, #081120 42%, #09131f 100%);
   min-height: 100vh;
 }
@@ -51,7 +51,7 @@ a {
 }
 
 ::selection {
-  background: rgba(126, 203, 255, 0.3);
+  background: rgba(77, 92, 144, 0.38);
   color: #ffffff;
 }
 
@@ -75,7 +75,7 @@ a {
   left: -100px;
   width: 360px;
   height: 360px;
-  background: rgba(78, 161, 255, 0.16);
+  background: rgba(77, 92, 144, 0.22);
 }
 
 .page-glow-right {
@@ -83,7 +83,7 @@ a {
   right: -120px;
   width: 320px;
   height: 320px;
-  background: rgba(124, 240, 199, 0.12);
+  background: rgba(139, 159, 215, 0.14);
 }
 
 .topbar {
@@ -114,7 +114,7 @@ a {
   width: 46px;
   height: 46px;
   border-radius: 16px;
-  background: linear-gradient(145deg, rgba(126, 203, 255, 0.18), rgba(124, 240, 199, 0.16));
+  background: linear-gradient(145deg, rgba(77, 92, 144, 0.28), rgba(102, 119, 179, 0.2));
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -127,12 +127,12 @@ a {
 
 .brand-mark span:nth-child(2) {
   inset: 14px;
-  border-color: rgba(126, 203, 255, 0.58);
+  border-color: rgba(77, 92, 144, 0.62);
 }
 
 .brand-mark span:nth-child(3) {
   inset: 18px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
   border: 0;
 }
 
@@ -208,7 +208,7 @@ a {
   width: 100%;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary), var(--primary-strong));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease;
@@ -231,9 +231,9 @@ a {
 }
 
 .topbar-cta {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #06121d;
-  box-shadow: 0 14px 34px rgba(78, 161, 255, 0.24);
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #f4f7ff;
+  box-shadow: 0 14px 34px rgba(77, 92, 144, 0.24);
 }
 
 .button {
@@ -246,8 +246,8 @@ a {
 }
 
 .button-primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #06121d;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  color: #f4f7ff;
 }
 
 .button-secondary {
@@ -283,7 +283,7 @@ a {
   margin-bottom: 18px;
   padding: 9px 14px;
   border-radius: 999px;
-  background: rgba(126, 203, 255, 0.12);
+  background: rgba(77, 92, 144, 0.14);
   color: var(--accent);
   font-size: 0.84rem;
   font-weight: 800;
@@ -376,8 +376,8 @@ a {
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    radial-gradient(circle at 35% 20%, rgba(126, 203, 255, 0.14), transparent 26%),
-    radial-gradient(circle at 80% 72%, rgba(124, 240, 199, 0.12), transparent 22%),
+    radial-gradient(circle at 35% 20%, rgba(77, 92, 144, 0.18), transparent 26%),
+    radial-gradient(circle at 80% 72%, rgba(102, 119, 179, 0.14), transparent 22%),
     linear-gradient(180deg, rgba(9, 17, 31, 0.92), rgba(7, 12, 22, 0.98));
 }
 
@@ -393,7 +393,7 @@ a {
   height: 220px;
   top: 18px;
   right: -22px;
-  background: rgba(126, 203, 255, 0.2);
+  background: rgba(77, 92, 144, 0.22);
 }
 
 .orb-two {
@@ -401,7 +401,7 @@ a {
   height: 180px;
   bottom: 38px;
   left: 6px;
-  background: rgba(124, 240, 199, 0.14);
+  background: rgba(102, 119, 179, 0.16);
 }
 
 .visual-card {
@@ -457,7 +457,7 @@ a {
   display: block;
   height: 10px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary), var(--primary-strong));
 }
 
 .visual-card ul {
@@ -523,7 +523,7 @@ a {
   justify-content: center;
   margin-bottom: 14px;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(126, 203, 255, 0.18), rgba(124, 240, 199, 0.14));
+  background: linear-gradient(135deg, rgba(77, 92, 144, 0.18), rgba(102, 119, 179, 0.16));
   color: var(--text);
   font-family: var(--font-heading);
   font-weight: 700;
@@ -612,7 +612,7 @@ a {
   justify-content: center;
   margin-bottom: 14px;
   border-radius: 14px;
-  background: rgba(126, 203, 255, 0.12);
+  background: rgba(77, 92, 144, 0.14);
   color: var(--primary);
   font-weight: 800;
 }
@@ -707,8 +707,8 @@ a {
 .contact-form input:focus,
 .contact-form select:focus,
 .contact-form textarea:focus {
-  border-color: rgba(126, 203, 255, 0.55);
-  box-shadow: 0 0 0 4px rgba(126, 203, 255, 0.12);
+  border-color: rgba(77, 92, 144, 0.6);
+  box-shadow: 0 0 0 4px rgba(77, 92, 144, 0.16);
 }
 
 .contact-message {
@@ -730,14 +730,14 @@ a {
 }
 
 .contact-success {
-  background: rgba(58, 197, 139, 0.12);
-  color: #9ef0c9;
-  border: 1px solid rgba(58, 197, 139, 0.22);
+  background: rgba(77, 92, 144, 0.12);
+  color: #dbe3ff;
+  border: 1px solid rgba(77, 92, 144, 0.22);
 }
 
 .contact-error {
-  background: rgba(255, 115, 115, 0.12);
-  color: #ffbbbb;
+  background: rgba(77, 92, 144, 0.12);
+  color: #dbe3ff;
   border: 1px solid rgba(255, 115, 115, 0.22);
 }
 
@@ -859,3 +859,5 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+

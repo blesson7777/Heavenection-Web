@@ -19,6 +19,10 @@ export const metadata = {
     "Heavenection builds responsive business systems for lead management, follow-ups, staff performance, salary control, and mobile operations.",
 };
 
+export const viewport = {
+  themeColor: "#4d5c90",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
