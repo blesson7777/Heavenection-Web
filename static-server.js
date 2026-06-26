@@ -2,7 +2,8 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 
-const port = Number.parseInt(process.env.PORT || "3000", 10);
+const primaryPort = Number.parseInt(process.env.PORT || "3000", 10);
+const fallbackPort = 3000;
 const hostname = "0.0.0.0";
 const publicDir = path.join(__dirname, "out");
 
@@ -45,8 +46,8 @@ function resolveFilePath(urlPath) {
   return path.join(publicDir, "404.html");
 }
 
-http
-  .createServer((request, response) => {
+function createStaticServer() {
+  return http.createServer((request, response) => {
     const filePath = resolveFilePath(request.url || "/");
     if (!filePath || !fs.existsSync(filePath)) {
       response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
@@ -62,7 +63,16 @@ http
         : "public, max-age=300",
     });
     fs.createReadStream(filePath).pipe(response);
-  })
-  .listen(port, hostname, () => {
+  });
+}
+
+function listenOnPort(port) {
+  createStaticServer().listen(port, hostname, () => {
     console.log(`Static server ready on http://${hostname}:${port}`);
   });
+}
+
+listenOnPort(primaryPort);
+if (primaryPort !== fallbackPort) {
+  listenOnPort(fallbackPort);
+}
