@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { companyContact, faqs, services, testimonials, trustReasons } from "./site-data";
 
+const backendEnquiryUrl = `${(
+  process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.heavenection.com"
+).replace(/\/$/, "")}/api/website-enquiries/`;
+
 const navLinks = [
   { href: "#support", label: "Support" },
   { href: "#trust", label: "Why us" },
@@ -142,15 +146,26 @@ export default function HomePage() {
     setEnquiryError("");
 
     try {
-      const response = await fetch("/api/enquiry", {
+      const enquiryPayload = {
+        ...formData,
+        message: `${formData.message}\n\nWebsite selected service: ${formData.service_interest}`,
+        page_url: buildTrackedPageUrl(),
+      };
+      const submitRequest = (url) => fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          message: `${formData.message}\n\nWebsite selected service: ${formData.service_interest}`,
-          page_url: buildTrackedPageUrl(),
-        }),
+        body: JSON.stringify(enquiryPayload),
       });
+
+      let response;
+      try {
+        response = await submitRequest("/api/enquiry");
+        if ([502, 503, 504].includes(response.status)) {
+          response = await submitRequest(backendEnquiryUrl);
+        }
+      } catch {
+        response = await submitRequest(backendEnquiryUrl);
+      }
 
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {

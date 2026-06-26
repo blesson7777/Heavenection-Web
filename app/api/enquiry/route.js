@@ -13,14 +13,23 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid enquiry payload." }, { status: 400 });
   }
 
-  const response = await fetch(`${backendBase.replace(/\/$/, "")}/api/website-enquiries/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-    cache: "no-store",
-  });
+  let response;
+  try {
+    response = await fetch(`${backendBase.replace(/\/$/, "")}/api/website-enquiries/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+      signal: AbortSignal.timeout(15000),
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "We could not reach the enquiry service right now." },
+      { status: 502 },
+    );
+  }
 
   const contentType = response.headers.get("content-type") || "";
   const body = contentType.includes("application/json")
