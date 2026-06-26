@@ -151,21 +151,11 @@ export default function HomePage() {
         message: `${formData.message}\n\nWebsite selected service: ${formData.service_interest}`,
         page_url: buildTrackedPageUrl(),
       };
-      const submitRequest = (url) => fetch(url, {
+      const response = await fetch(backendEnquiryUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(enquiryPayload),
       });
-
-      let response;
-      try {
-        response = await submitRequest("/api/enquiry");
-        if ([502, 503, 504].includes(response.status)) {
-          response = await submitRequest(backendEnquiryUrl);
-        }
-      } catch {
-        response = await submitRequest(backendEnquiryUrl);
-      }
 
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {

@@ -14,11 +14,9 @@ FROM base AS runner
 ENV NODE_ENV=production
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/out ./out
 COPY package.json ./
-COPY server.js ./
+COPY static-server.js ./
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["node", "static-server.js"]
