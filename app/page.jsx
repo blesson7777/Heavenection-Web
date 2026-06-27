@@ -458,8 +458,8 @@ export default function HomePage() {
 
             <motion.div
               className="promise-trust-core"
-              initial={{ opacity: 0, scale: 0.65 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.65, x: "-50%", y: "-50%" }}
+              whileInView={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.35, type: "spring", stiffness: 170, damping: 14 }}
             >
