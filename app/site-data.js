@@ -142,6 +142,16 @@ export const faqs = [
     question: "Can I visit the office?",
     answer: "Yes. The office is located opposite CSI Church, Kattappana, Idukki, Kerala.",
   },
+  {
+    question: "Do you serve customers across Kerala?",
+    answer:
+      "Yes. Heavenection serves customers across Kerala and can guide you through the process based on your location and requirements.",
+  },
+  {
+    question: "Is it mandatory to visit the office?",
+    answer:
+      "No. You can begin your enquiry by phone or through the website, and the team will let you know if an office visit is needed at any stage.",
+  },
 ];
 
 export const companyContact = {
