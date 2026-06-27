@@ -45,6 +45,19 @@ const promiseItems = [
 
 const supportOptions = services;
 
+const enquiryOptions = [
+  "Personal Loan",
+  "Home Loan",
+  "Business Loan",
+  "Property Loan",
+  ...services.slice(2).map((service) => service.title),
+];
+
+const enquiryServiceAliases = {
+  "Personal & Home Loans": "Personal Loan",
+  "Business & Property Loans": "Business Loan",
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 34 },
   visible: {
@@ -107,7 +120,7 @@ export default function HomePage() {
     name: "",
     phone: "",
     email: "",
-    service_interest: "Personal & Home Loans",
+    service_interest: "Personal Loan",
     message: "",
   });
   const { scrollYProgress } = useScroll();
@@ -124,8 +137,9 @@ export default function HomePage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const selectedService = params.get("service");
-    if (selectedService && supportOptions.some((item) => item.title === selectedService)) {
-      setFormData((current) => ({ ...current, service_interest: selectedService }));
+    const enquiryService = enquiryServiceAliases[selectedService] || selectedService;
+    if (enquiryService && enquiryOptions.includes(enquiryService)) {
+      setFormData((current) => ({ ...current, service_interest: enquiryService }));
     }
   }, []);
 
@@ -167,7 +181,7 @@ export default function HomePage() {
         name: "",
         phone: "",
         email: "",
-        service_interest: "Personal & Home Loans",
+        service_interest: "Personal Loan",
         message: "",
       });
     } catch (error) {
@@ -566,9 +580,9 @@ export default function HomePage() {
                 value={formData.service_interest}
                 onChange={handleEnquiryChange}
               >
-                {supportOptions.map((option) => (
-                  <option key={option.title} value={option.title}>
-                    {option.title}
+                {enquiryOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
                   </option>
                 ))}
               </select>
