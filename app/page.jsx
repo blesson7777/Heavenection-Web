@@ -430,52 +430,46 @@ export default function HomePage() {
             </ul>
           </motion.div>
 
-          <motion.div className="connection-stage" variants={fadeUp} aria-hidden="true">
-            <motion.div className="connection-card need-card" variants={panelLeft}>
-              <span>Customer need</span>
-              <strong>Home, personal, or business support</strong>
+          <motion.div className="connection-stage promise-visual" variants={fadeUp} aria-hidden="true">
+            <div className="promise-visual-topline">
+              <span className="promise-live-dot" />
+              <span>Guidance that stays with you</span>
+              <strong>100% remote</strong>
+            </div>
+
+            <div className="promise-orbit promise-orbit-outer" />
+            <div className="promise-orbit promise-orbit-inner" />
+            <div className="promise-signal signal-one" />
+            <div className="promise-signal signal-two" />
+            <div className="promise-signal signal-three" />
+
+            <motion.div className="promise-step-card promise-step-request" variants={panelLeft}>
+              <span>01</span>
+              <div><small>You share</small><strong>Your requirement</strong></div>
             </motion.div>
-            <motion.div className="connection-card support-card-visual" variants={panelRight}>
-              <span>Heavenection support</span>
-              <strong>Clear guidance and next steps</strong>
+            <motion.div className="promise-step-card promise-step-guide" variants={panelRight}>
+              <span>02</span>
+              <div><small>We guide</small><strong>Clearly &amp; remotely</strong></div>
             </motion.div>
+            <motion.div className="promise-step-card promise-step-solution" variants={fadeUp}>
+              <span>03</span>
+              <div><small>You receive</small><strong>The right next step</strong></div>
+            </motion.div>
+
             <motion.div
-              className="connection-line"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.18, duration: 0.75, ease: "easeOut" }}
-            />
-            <motion.div
-              className="connection-center"
-              initial={{ opacity: 0, scale: 0.7 }}
+              className="promise-trust-core"
+              initial={{ opacity: 0, scale: 0.65 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.42, type: "spring", stiffness: 180, damping: 15 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ delay: 0.35, type: "spring", stiffness: 170, damping: 14 }}
             >
-              <span>Clear path</span>
+              <div className="promise-shield"><span /></div>
+              <strong>Trusted<br />support</strong>
             </motion.div>
-            <motion.div
-              className="connection-dot dot-one"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.55 }}
-            />
-            <motion.div
-              className="connection-dot dot-two"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.68 }}
-            />
-            <motion.div
-              className="connection-dot dot-three"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ delay: 0.81 }}
-            />
+
+            <div className="promise-service-row">
+              <span>Personal</span><span>Home</span><span>Business</span><span>Property</span>
+            </div>
           </motion.div>
         </motion.section>
 
