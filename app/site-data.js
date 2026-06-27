@@ -150,7 +150,7 @@ export const faqs = [
   {
     question: "Is it mandatory to visit the office?",
     answer:
-      "No. You can begin your enquiry by phone or through the website, and the team will let you know if an office visit is needed at any stage.",
+      "No. An office visit is not required. The entire process can be completed remotely, and our team will guide you at every step.",
   },
 ];
 
