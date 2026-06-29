@@ -38,7 +38,7 @@ export default async function ServicePage({ params }) {
   }
 
   const enquiryUrl = `/?service=${encodeURIComponent(service.title)}#contact`;
-  const whatsappUrl = `https://wa.me/919846262047?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/919746862047?text=${encodeURIComponent(
     `Hi Heavenection, I need guidance for ${service.title}.`,
   )}`;
 

@@ -155,12 +155,12 @@ export const faqs = [
 ];
 
 export const companyContact = {
-  phone: "9846262047",
+  phone: "9746862047",
   email: "heavenection@gmail.com",
   addressLineOne: "16/2561, Opposite CSI Church",
   addressLineTwo: "Kattappana, Idukki, Kerala - 685508",
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=16%2F2561%20Opposite%20CSI%20Church%20Kattappana%20Idukki%20Kerala%20685508",
   whatsapp:
-    "https://wa.me/919846262047?text=Hi%20Heavenection%2C%20I%20need%20financial%20support%20guidance.",
+    "https://wa.me/919746862047?text=Hi%20Heavenection%2C%20I%20need%20financial%20support%20guidance.",
 };

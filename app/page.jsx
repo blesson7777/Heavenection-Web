@@ -301,7 +301,7 @@ export default function HomePage() {
               <a className="button button-primary" href="#contact">
                 Talk to us
               </a>
-              <a className="button button-light" href="tel:9846262047">
+              <a className="button button-light" href={`tel:${companyContact.phone}`}>
                 Call {companyContact.phone}
               </a>
             </motion.div>
